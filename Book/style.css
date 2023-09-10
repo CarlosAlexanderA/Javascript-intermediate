@@ -31,17 +31,18 @@ button.btn{
     cursor: pointer;
 }
 button.btn:hover{
-    background-color: rgba(0, 0, 0, 0.151);
+    filter: brightness(90%);
 }
 main .library{
     margin: 2em 0;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2em;
 }
 .book{
     align-items: center;
     background-color: white;
-    border-radius: .5em;
+    border-radius: .7em;
     display: flex;
     flex-direction: column;
     gap: 1em;

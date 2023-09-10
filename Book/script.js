@@ -1,6 +1,6 @@
 const myLibrary = [
-  new Book("El libro","Anonimo",153,"si"),
-  new Book("El libro2","Anonimo2",1530,"si")
+  new Book("El libro","Anonimo",153,true),
+  new Book("El libro2","Anonimo2",1530,false)
 ];
 
 function Book(title,author,pages,read) {
@@ -8,6 +8,7 @@ function Book(title,author,pages,read) {
   this.author = author;
   this.pages = pages;
   this.read = read;
+
 
 }
 
@@ -19,16 +20,7 @@ const bgClose = document.getElementById("close");
 const modal = document.getElementById("modal");
 const form = document.getElementById("miForm");
 const library = document.querySelector(".library");
-const book = document.createElement("div");
-book.className = "book";
-const title = document.createElement("h2");
-title.className = "title";
-const author = document.createElement("h4");
-author.className = "author";
-const pages = document.createElement("h5");
-pages.className = "pages";
-const button = document.createElement("button");
-button.className = "btn";
+
 addBook.addEventListener("click", ()=>{
   modal.style.display = "flex";
   
@@ -42,16 +34,62 @@ bgClose.addEventListener("click", () =>{
 
 form.addEventListener("submit", (e)=>{
   e.preventDefault();
-  console.log("form enviado sin recarga")
-  closeModal()
-  addBookToLibrary("Hello", "Hello", "Hello", "Hello");
+  console.log(e)
+  closeModal();
+  addBookToLibrary(form[0].value, form[1].value, form[2].value, form[3].checked);
+  showBooks();
 });
-book.append(title,author, pages, button)
-library.appendChild(book);
-const showBooks = () =>{
-  myLibrary.forEach((elem) => {
-    console.log(elem);
-  });
-};
 
-showBooks()
+let buttonsRead, buttonsRemove;
+
+const showBooks = () =>{
+  library.innerHTML = "";
+  let i = 0;
+  myLibrary.forEach((elem) => {
+    const book = document.createElement("div");
+    book.className = `book book_${i++}`;
+    const title = document.createElement("h2");
+    title.className = "title";
+    title.textContent = elem.title;
+    const author = document.createElement("h4");
+    author.className = "author";
+    author.textContent = elem.author;
+    const pages = document.createElement("h5");
+    pages.className = "pages";
+    pages.textContent = elem.pages;
+    const button1 = document.createElement("button");
+    button1.className = `btn btnRead ${elem.read ? "green" : "red"}`;
+    button1.textContent = `${elem.read ? "Read" : "Not Read"}`
+    const button2 = document.createElement("button");
+    button2.className = "btn btnRemove";
+    button2.textContent = "Remove"
+    book.append(title,author, pages, button1, button2)
+    library.appendChild(book);
+  });
+  buttonsRead = document.querySelectorAll(".btnRead");
+  buttonsRemove = document.querySelectorAll(".btnRemove");
+
+  buttonsRead.forEach((btn, index) => {
+    btn.addEventListener("click", () => {
+      btn.classList.toggle("green");
+      btn.classList.toggle("red");
+      btn.textContent = btn.classList.contains("green") ? "Read" : "Not Read";
+      myLibrary[index].read = !myLibrary[index].read; // Actualiza el estado de lectura en el objeto Book
+    });
+  });
+  
+  buttonsRemove.forEach((btn, index) => {
+    btn.addEventListener("click", () => {
+      myLibrary.splice(index, 1);
+      showBooks();
+    });
+  });
+
+};
+showBooks();
+
+
+
+
+
+
