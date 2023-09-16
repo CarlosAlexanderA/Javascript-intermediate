@@ -36,6 +36,23 @@
             <h2 id="winner"></h2>
         </div>
     </div>
-    
+
+    <button id="miBoton">Hacer Algo Asíncrono</button>
+
+    <script>
+        const miBoton = document.getElementById('miBoton');
+
+        async function funcionAsincrona() {
+            // Realiza alguna operación asincrónica aquí
+            await new Promise(resolve => setTimeout(resolve, 1000)); // Simula una operación asincrónica de 1 segundo
+            console.log('Operación asincrónica completada.');
+        }
+
+        miBoton.addEventListener('click', async () => {
+            miBoton.disabled = true; // Deshabilita el botón para evitar clics repetidos
+            await funcionAsincrona();
+            miBoton.disabled = false; // Habilita el botón después de que se completa la operación
+        });
+    </script>
 </body>
 </html>

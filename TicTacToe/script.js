@@ -27,18 +27,19 @@ const gameBoard = function () {
     };
 
     this.isBoardFilled = (state) =>{
-        return state.filter(item => item.innerText != "");
+        return state.every(item => item.innerText != "");
     };
     
     this.isPlayerWin = (state, player) =>{
-        if (state[3].innerText == state[4].innerText == state[5].innerText == player) return true;
-        if (state[0].innerText == state[1].innerText == state[2].innerText == player) return true;
-        if (state[6].innerText == state[7].innerText == state[8].innerText == player) return true;
-        if (state[0].innerText == state[3].innerText == state[6].innerText == player) return true;
-        if (state[1].innerText == state[4].innerText == state[7].innerText == player) return true;
-        if (state[2].innerText == state[5].innerText == state[8].innerText == player) return true;
-        if (state[0].innerText == state[4].innerText == state[8].innerText == player) return true;
-        if (state[2].innerText == state[4].innerText == state[8].innerText == player) return true;
+        if (state[0].innerText === player && state[1].innerText === player && state[2].innerText === player) return true;
+        if (state[3].innerText === player && state[4].innerText === player && state[5].innerText === player) return true;
+        if (state[6].innerText === player && state[7].innerText === player && state[8].innerText === player) return true;
+        if (state[0].innerText === player && state[3].innerText === player && state[6].innerText === player) return true;
+        if (state[1].innerText === player && state[4].innerText === player && state[7].innerText === player) return true;
+        if (state[2].innerText === player && state[5].innerText === player && state[8].innerText === player) return true;
+        if (state[0].innerText === player && state[4].innerText === player && state[8].innerText === player) return true;
+        if (state[2].innerText === player && state[4].innerText === player && state[6].innerText === player) return true;
+
 
         return false;
     };
@@ -46,14 +47,19 @@ const gameBoard = function () {
     this.checkWinner = ()=>{
 
         if (this.isPlayerWin(this.board, this.humanPlayer)){
+            console.log("user");
             winnerText.innerText = ` Player ${this.humanPlayer} wins the game!`;
             return true;
         };
         if (this.isPlayerWin(this.board, this.botPlayer)){
+            console.log("bot");
+
             winnerText.innerText = ` Player ${this.botPlayer} wins the game!`;
             return true;
         };
         if (this.isBoardFilled(this.board)){
+            console.log("match draw");
+
             winnerText.innerText = ` Match Draw!`;
             return true;
         };
@@ -61,17 +67,20 @@ const gameBoard = function () {
         return false;
     };
 
-    this.start = () =>{
-        let human = new this.humanPlayer(this.humanPlayer);
+    this.start = async() =>{
+        let human = new HumanPlayer(this.humanPlayer);
 
-        while (true) {
-            self.showBoard();
-
-            let square = human.humanMove(self.board);
-            self.board[square] = self.humanPlayer;
-            if (self.checkWinner())
+        for (let i = 0; i < 9; i++) { 
+            this.showBoard();
+            const indexHuman =  await human.humanMove(this.board);
+            this.board[indexHuman].innerText = this.humanPlayer;
+            console.log(this.board);
+            if (this.checkWinner()) {
                 break;
-        };
+            }
+            // if(i == 5)
+            //     break;
+        }
     };
 
 
@@ -80,17 +89,43 @@ const gameBoard = function () {
 const HumanPlayer = function (letter){
     this.letter = letter;
 
-    this.humanMove = (state) =>{
-        let idItem;
-        state.forEach(item =>{
-            if (item.innerText == "")
-                item.addEventListener("click", () => {
-                    idItem = item.id;
-                }); 
+    this.humanMove = (state) => {
+        return new Promise((resolve) => {
+            const clickHandler = (event) => {
+                const item = event.target;
+                if (item.innerText == "") {
+                    item.innerText = "X";
+                    const id = parseInt(item.id.slice(-1));
+                    console.log(id);
+                    state.forEach(item => {
+                        item.removeEventListener("click", clickHandler); // Elimina el event listener de todos los elementos
+                    });
+                    resolve(id);
+                }
+            };
+    
+            state.forEach(item => {
+                item.addEventListener("click", clickHandler);
+            });
         });
-        return idItem
-    };
+    };    
 };
 
 const frame = new gameBoard();
 // console.log(frame.board)
+data = [1,2,3,4,5,6,7,8,9]
+
+
+
+const getAlgo = (index)=>{
+    return new Promise((resolve, reject) => {
+       setTimeout(()=>resolve(data[index]), 2000) 
+    });
+};
+
+const processArray = async () => {
+    for (let i = 0; i < 9; i++) {
+        const result = await getAlgo(i);
+        console.log(result);
+    }
+};
