@@ -64,8 +64,8 @@ button:hover{
     padding: 2em 0;
 }
 .table > .box{
-    border-right: .3em solid red;
-    border-bottom: .3em solid red;
+    border-right: .1em solid red;
+    border-bottom: .1em solid red;
     /* border-radius: .5em; */
     cursor: pointer;
     transition: all .3s ease;
@@ -73,6 +73,9 @@ button:hover{
     /* height: 100%; */
     border-radius: 0;
     display: block;
+    font-size: 2em;
+    color: black;
+    outline: none;
 }
 .box:active{
     background-color: whitesmoke;

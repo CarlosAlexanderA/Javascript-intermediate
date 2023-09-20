@@ -11,9 +11,9 @@
     <div class="container">
         <div class="top">
             <div class="level">
-                <select name="levels" id="levels">
+                <select id="levels">
                     <option value="easy">Easy</option>
-                    <option value="Medium">Medium</option>
+                    <option value="hard" selected>Hard</option>
                 </select>
             </div>
             <div class="buttons"><button class="selected">X</button><button>X</button></div>
@@ -31,7 +31,7 @@
                 <button class="box no-r no-b"></button> -->
             </div>
         </div>
-        <div class="bottom"><button class="selected">Restart</button></div>
+        <div class="bottom"><button class="selected" onclick="boardPlay.showBoard()">Restart</button></div>
         <div class="selectWinner">
             <h2 id="winner"></h2>
         </div>
