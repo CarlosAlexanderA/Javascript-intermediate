@@ -1,16 +1,19 @@
+
+
+class Book{
+  constructor(title, author, pages, read){
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
+
+}
+
 const myLibrary = [
   new Book("El libro","Anonimo",153,true),
   new Book("El libro2","Anonimo2",1530,false)
 ];
-
-function Book(title,author,pages,read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-
-
-}
 
 function addBookToLibrary(title, author, pages, read) {
   myLibrary.push(new Book(title, author, pages, read));
@@ -28,9 +31,7 @@ addBook.addEventListener("click", ()=>{
 const closeModal = () =>{
   modal.style.display = "none";
 }
-bgClose.addEventListener("click", () =>{
-  closeModal()
-})
+bgClose.addEventListener("click", closeModal)
 
 form.addEventListener("submit", (e)=>{
   e.preventDefault();
