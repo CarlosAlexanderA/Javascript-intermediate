@@ -1,0 +1,17 @@
+@font-face {
+    font-family: "Cascadia Code";
+    src: url("./CascadiaCodePL.ttf") format(".ttf"),
+        url("./CascadiaCodePLItalic.woff2") format(".woff2");
+    font-weight: 600;
+    font-style: normal;
+}
+
+.hello{
+    font-family: "Cascadia Code";
+    background-color: aquamarine;
+    color: red;
+    font-size: 1em;
+}
+img{
+    width: 50px;
+}
