@@ -1,0 +1,237 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,400;0,500;0,600;0,800;0,900;1,200;1,400;1,500&display=swap");
+@font-face {
+  font-family: "Cascadia Code";
+  src: url("./CascadiaCodePL.ttf") format("ttf"),
+    url("./CascadiaCodePL.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+}
+
+:root {
+  --dark-blue: #042f4b;
+  --pink: #ed1250;
+  --pale-yellow: #fff6da;
+  --orange: #fbc99d;
+  --salmon: rgba(255, 68, 68, 0.28);
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+h2 {
+  color: inherit;
+}
+ul {
+  list-style: none;
+  display: flex;
+  gap: 1.1em;
+}
+button {
+  border: none;
+  cursor: pointer;
+}
+
+.container {
+  margin: 0 10%;
+}
+header.header > .container > nav > ul > li > a.on {
+  color: var(--pink);
+}
+body {
+  font-family: "Poppins", "sans-serif";
+  width: 100vw;
+  height: 100vh;
+}
+#content {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  background-color: #ed1250;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: stretch;
+}
+.header {
+  background-color: var(--dark-blue);
+  color: var(--pale-yellow);
+  padding: 1.2em 0.5em;
+  /* position: relative;
+  z-index: 1000; */
+}
+.header > .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header .logo {
+  color: var(--pink);
+  font-size: 1.3em;
+  font-weight: 900;
+}
+.header nav a {
+  font-weight: 500;
+  font-size: 1.1em;
+}
+main {
+  width: 100%;
+  flex-grow: 1;
+}
+main > #home {
+  display: none;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  background-image: url("https://images.unsplash.com/photo-1579751626657-72bc17010498?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80");
+  background-size: cover;
+  display: none;
+}
+main > #home > .hero {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+}
+
+.hero > h1 {
+  font-size: 3.3em;
+  background-image: linear-gradient(
+    to right,
+    var(--pink) 0%,
+    var(--orange) 100%
+  );
+  background-clip: text;
+  color: transparent;
+  font-weight: 900;
+  text-wrap: balance;
+  text-align: center;
+}
+.hero > p {
+  font-size: 1.3em;
+  color: var(--orange);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+.hero > button {
+  font-size: 1.5em;
+  font-weight: 800;
+  color: var(--pale-yellow);
+  background-color: var(--pink);
+  padding: 0.5em 1em;
+  border-radius: 1em;
+}
+main > #home > .info {
+  grid-column: 2 / 3;
+  grid-row: 3 / 4;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: var(--pale-yellow);
+  margin: 2em 6em;
+  border-radius: 0.5em;
+  padding: 1.5em 2em;
+}
+.info .card {
+  flex: 1 1 50%;
+  display: flex;
+  gap: 1em;
+}
+
+.info .card > span,
+.info .card > p {
+  font-weight: 600;
+  font-size: 1.2em;
+}
+.card > span,
+.card > p > span {
+  color: var(--pink);
+}
+#home .info > .card > .material-symbols-outlined {
+  font-size: 1.9em;
+}
+
+main #menu {
+  background-color: var(--pale-yellow);
+  padding: 2em 0.5em;
+}
+main #menu .container {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+main #menu .hero {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+main #menu .hero > h3 {
+  font-size: 2.5em;
+  position: relative;
+}
+main #menu .hero > h3::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  right: 30%;
+  width: 50%;
+  height: 2px;
+  background-color: var(--pink);
+}
+main #menu .hero > h3 > span {
+  font-size: 1em;
+}
+main #menu .menu-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  grid-template-rows: repeat(
+    2,
+    auto
+  ); /* Aquí definimos dos filas autoajustables */
+  background-color: var(--orange);
+  padding: 2em 3em;
+  border-radius: 2em;
+  justify-items: stretch;
+  align-items: center;
+  justify-content: space-between;
+  row-gap: 3em;
+  column-gap: 1em;
+}
+.menu-container .card {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+  padding: 1em;
+}
+.menu-container .card > img {
+  width: 182px;
+}
+.menu-container .card > .text-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  gap: 0.5em;
+  font-size: 1.4em;
+}
+.card > .text-card > h5 {
+  font-size: 1.1em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 2px dashed var(--dark-blue);
+}
+.card > .text-card > h5 > span {
+  color: var(--pink);
+}
+.card > .text-card > p {
+  word-spacing: 0.3em;
+}
