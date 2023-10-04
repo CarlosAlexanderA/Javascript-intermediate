@@ -29,7 +29,7 @@ h2 {
 ul {
   list-style: none;
   display: flex;
-  gap: 1.1em;
+  gap: 3.5em;
 }
 button {
   border: none;
@@ -77,22 +77,28 @@ body {
   font-weight: 500;
   font-size: 1.1em;
 }
+.header nav ul {
+}
 main {
   width: 100%;
   flex-grow: 1;
 }
+.active {
+  display: block !important;
+}
 main > #home {
-  display: none;
+  background-image: url("https://images.unsplash.com/photo-1579751626657-72bc17010498?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80");
+  background-size: cover;
   width: 100%;
   height: 100%;
+  display: none;
+}
+main > #home > .container {
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
-  background-image: url("https://images.unsplash.com/photo-1579751626657-72bc17010498?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80");
-  background-size: cover;
-  display: none;
 }
-main > #home > .hero {
+main > #home > .container > .hero {
   grid-column: 2 / 3;
   grid-row: 2 / 3;
   display: flex;
@@ -128,7 +134,7 @@ main > #home > .hero {
   padding: 0.5em 1em;
   border-radius: 1em;
 }
-main > #home > .info {
+main > #home > .container > .info {
   grid-column: 2 / 3;
   grid-row: 3 / 4;
   display: flex;
@@ -162,22 +168,28 @@ main > #home > .info {
 main #menu {
   background-color: var(--pale-yellow);
   padding: 2em 0.5em;
+  display: none;
 }
-main #menu .container {
+
+main #menu .container,
+main #contact .container {
   display: flex;
   flex-direction: column;
   gap: 2em;
 }
-main #menu .hero {
+main #menu .hero,
+main #contact .hero {
   display: flex;
   justify-content: center;
   position: relative;
 }
-main #menu .hero > h3 {
+main #menu .hero > h3,
+main #contact .hero > h3 {
   font-size: 2.5em;
   position: relative;
 }
-main #menu .hero > h3::after {
+main #menu .hero > h3::after,
+main #contact .hero > h3::after {
   content: "";
   position: absolute;
   top: 100%;
@@ -234,4 +246,90 @@ main #menu .menu-container {
 }
 .card > .text-card > p {
   word-spacing: 0.3em;
+}
+main #contact {
+  background-color: var(--pale-yellow);
+  height: 100%;
+  display: none;
+}
+main #contact .contact-container {
+  flex-grow: 1;
+  background-color: var(--orange);
+  padding: 3.5em;
+  border-radius: 2em;
+  margin: 3em 10rem;
+}
+#contact .contact-container > .contact-square {
+  display: flex;
+  align-items: stretch;
+  gap: 8%;
+}
+
+#contact .contact-container > .contact-square > .contact-form {
+  width: 40%;
+  flex-basis: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
+.contact-form > .form-info {
+  display: flex;
+  gap: 1em;
+  flex-direction: column;
+}
+.contact-form > .form-info > .item > p {
+  line-height: 1.3em;
+}
+.contact-form > .form-info > .item > p > span {
+  color: var(--pink);
+}
+.contact-form > form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
+.contact-form form > .form-title {
+  font-size: 1.3em;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  color: var(--pink);
+  display: flex;
+  gap: 0.4em;
+}
+input,
+textarea {
+  border: none;
+  background-color: transparent;
+  border-bottom: 2px solid black;
+  padding: 0.5em 0.3em;
+  font-size: 1.1em;
+  font-family: "Poppins";
+  width: 100%;
+}
+textarea {
+  resize: none;
+}
+textarea:focus-visible,
+input:focus-visible {
+  outline: none;
+}
+.contact-form form button {
+  color: white;
+  border: none;
+  background-color: var(--pink);
+  display: inline;
+  padding: 0.8em 2.5em;
+  border-radius: 0.3em;
+  font-size: 1em;
+  font-weight: 500;
+}
+#contact .contact-container > .contact-square > .location-map {
+  /* width: ; */
+  flex-grow: 6;
+  flex-basis: auto;
+}
+.contact-square > .location-map > iframe {
+  width: 100%;
+  height: 100%;
 }
