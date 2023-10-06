@@ -32,6 +32,7 @@ a {
 }
 button {
   border: none;
+  background-color: transparent;
 }
 input[type="checkbox"] {
   width: 1.3em;
@@ -93,11 +94,29 @@ main > aside {
 main > aside > nav > ul {
   display: flex;
   flex-direction: column;
-  gap: 0.8em;
+  gap: 1em;
 }
 main > aside > nav > ul > li > a {
   display: flex;
   justify-content: space-between;
+  font-size: 1.1rem;
+  font-weight: 300;
+}
+main > aside > nav > ul > li > a:not(.other-list):hover > span,
+main > aside > nav > ul > li > a.active > span,
+main > aside > nav > ul > li > a.other-list ~ ul a:hover > span,
+main > aside > nav > ul > li > a.other-list ~ ul a.active > span {
+  color: var(--purple-dark);
+  font-weight: 500;
+  font-size: 1.2em;
+}
+main > aside > nav > ul > li > a.active > span::before,
+main > aside > nav > ul > li > a:hover > span::before,
+main > aside > nav > ul > li > a.other-list ~ ul a:hover > span::before,
+main > aside > nav > ul > li > a.other-list ~ ul a.active > span::before {
+  content: "//";
+  font-size: 0.8em;
+  margin-right: 0.4em;
 }
 .number-round {
   background-color: var(--pink-pale);
@@ -110,6 +129,7 @@ main > aside > nav > ul > li > a {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-weight: 500;
 }
 .number-round > span {
   font-size: 0.9em;
@@ -130,7 +150,17 @@ main > aside > nav > ul > li > a {
   box-shadow: 5px 5px 15px -8px rgba(0, 0, 0, 0.75);
   cursor: pointer;
 }
-
+main > aside > nav > ul > li > a.other-list ~ ul {
+  margin: 1em 0 1em 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+main > aside > nav > ul > li > a.other-list ~ ul > li > a {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 300;
+}
 main .main-container {
   padding-top: 2em;
 }
@@ -142,14 +172,25 @@ main .main-container .container > .list-notes {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto;
+  gap: 1em;
 }
 
 .list-notes > .card {
   display: flex;
   justify-content: space-between;
-  background-color: beige;
+  background-color: #eee;
   border-left: 2px solid var(--red);
   padding: 0.6em 0.5em;
+}
+.list-notes > .card:hover {
+  -webkit-transform: scale(1.003);
+  transform: scale(1.003);
+  -webkit-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+  -webkit-box-shadow: 3px 3px 5px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 3px 3px 5px 2px rgba(0, 0, 0, 0.2);
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
 }
 .list-notes > .card > .left {
   display: flex;
@@ -235,14 +276,15 @@ input[type="checkbox"]:checked::after {
   font-size: 0.8em;
   font-weight: 500;
   color: var(--purple-dark);
+  transition: all 0.3s;
+}
+.list-notes > .card > .right > span:not(#fch-simple):hover {
+  color: var(--green-ligth);
+  cursor: pointer;
 }
 .list-notes > .card > .right > button {
-  background-color: transparent;
-  color: var(--green-ligth);
-  border: 2px solid var(--green-ligth);
-  padding: 0.3em 0.5em;
-  font-weight: 500;
-  text-transform: uppercase;
+  font-size: 0.8em;
+  padding: 0.4em 0.5em;
 }
 
 #content > .modal-new-nota {
@@ -256,6 +298,7 @@ input[type="checkbox"]:checked::after {
   display: flex;
   justify-content: center;
   align-items: center;
+  display: none;
 }
 #content > .modal-new-nota > .square-form {
   display: grid;
@@ -335,7 +378,6 @@ input[type="checkbox"]:checked::after {
   background-color: white;
 }
 .form-main > #to-do > .details-form {
-  background-color: violet;
   display: flex;
   justify-content: space-between;
 }
@@ -343,4 +385,85 @@ input[type="checkbox"]:checked::after {
   display: flex;
   flex-direction: column;
   gap: 0.5em;
+}
+.form-main > #to-do > .details-form > .dates-form > .date-form {
+  display: flex;
+  gap: 1em;
+}
+
+.form-main .dates-form > .date-form > .date-form-options {
+  display: flex;
+  gap: 1em;
+}
+label {
+  font-size: 1.1rem;
+}
+.date-form-options input[type="radio"] {
+  clip: rect(0 0 0 0);
+  clip-path: inset(100%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.date-form-options label span {
+  display: block;
+  position: relative;
+  transition: background-color 0.5s ease;
+}
+.btn-light {
+  --color-prim: #3ba395;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  padding: 0.2em 0.5em;
+  border: 1px solid var(--color-prim);
+  color: var(--color-prim);
+  border-radius: 0.3em;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  text-align: center;
+  font-weight: 500;
+}
+.btn-light.green {
+  color: var(--green);
+  border: 1px solid var(--green);
+}
+.btn-light.orange {
+  color: orange;
+  border: 1px solid orange;
+}
+.btn-light.red {
+  color: var(--red);
+  border: 1px solid var(--red);
+}
+
+.btn-light:not(input[type="date"]):active,
+.btn-light:not(input[type="date"]):hover {
+  background-color: var(--color-prim);
+  z-index: 1;
+  color: white;
+}
+.date-form-options input[type="radio"]:checked + span.red,
+.date-form-options span.red:hover {
+  background-color: var(--red);
+  z-index: 1;
+  color: white;
+}
+.date-form-options input[type="radio"]:checked + span.orange,
+.date-form-options span.orange:hover {
+  background-color: orange;
+  z-index: 1;
+  color: white;
+}
+.date-form-options input[type="radio"]:checked + span.green,
+.date-form-options span.green:hover {
+  background-color: var(--green);
+  z-index: 1;
+  color: white;
+}
+.details-form > .submit-form {
+  display: flex;
+  align-items: end;
 }

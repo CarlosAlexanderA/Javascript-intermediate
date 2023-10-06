@@ -29,29 +29,51 @@
             <nav>
               <ul>
                 <li>
-                  <a href="#"
-                    >Home
-                    <div class="number-round"><span>28</span></div></a
-                  >
+                  <a href="#" class="active">
+                    <span>Home</span>
+                    <div class="number-round"><span>28</span></div>
+                  </a>
                 </li>
                 <li>
-                  <a href="#"
-                    >Today
-                    <div class="number-round"><span>8</span></div></a
-                  >
+                  <a href="#">
+                    <span>Today</span>
+                    <div class="number-round"><span>8</span></div>
+                  </a>
                 </li>
                 <li>
-                  <a href="#"
-                    >Week
-                    <div class="number-round"><span>800</span></div></a
-                  >
+                  <a href="#">
+                    <span>Week</span>
+                    <div class="number-round"><span>800</span></div>
+                  </a>
                 </li>
-                <li><a href="#">Projects</a></li>
                 <li>
-                  <a href="#"
-                    >Notes
-                    <div class="number-round"><span>8</span></div></a
-                  >
+                  <a href="#" class="other-list">Projects</a>
+                  <ul>
+                    <li>
+                      <a href="#">
+                        <span>Gym</span>
+                        <div class="number-round"><span>800</span></div>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <span>Gym</span>
+                        <div class="number-round"><span>800</span></div>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <span>Gym</span>
+                        <div class="number-round"><span>800</span></div>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="#">
+                    <span>Notes</span>
+                    <div class="number-round"><span>8</span></div>
+                  </a>
                 </li>
               </ul>
             </nav>
@@ -70,7 +92,79 @@
                     <h5 class="dsc-note">Brush teeth</h5>
                   </div>
                   <div class="right">
-                    <button id="dtl-note">Details</button>
+                    <button id="dtl-note" class="btn-light">Details</button>
+                    <span id="fch-simple">Dec 11th</span>
+                    <span class="icon" id="edit-note">
+                      <i class="fa-solid fa-pen-to-square"></i>
+                    </span>
+                    <span class="icon" id="del-note">
+                      <i class="fa-solid fa-trash-can"></i>
+                    </span>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="left">
+                    <label class="cont">
+                      <input type="checkbox" checked="" />
+                    </label>
+                    <h5 class="dsc-note">Brush teeth</h5>
+                  </div>
+                  <div class="right">
+                    <button id="dtl-note" class="btn-light">Details</button>
+                    <span id="fch-simple">Dec 11th</span>
+                    <span class="icon" id="edit-note">
+                      <i class="fa-solid fa-pen-to-square"></i>
+                    </span>
+                    <span class="icon" id="del-note">
+                      <i class="fa-solid fa-trash-can"></i>
+                    </span>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="left">
+                    <label class="cont">
+                      <input type="checkbox" checked="" />
+                    </label>
+                    <h5 class="dsc-note">Brush teeth</h5>
+                  </div>
+                  <div class="right">
+                    <button id="dtl-note" class="btn-light">Details</button>
+                    <span id="fch-simple">Dec 11th</span>
+                    <span class="icon" id="edit-note">
+                      <i class="fa-solid fa-pen-to-square"></i>
+                    </span>
+                    <span class="icon" id="del-note">
+                      <i class="fa-solid fa-trash-can"></i>
+                    </span>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="left">
+                    <label class="cont">
+                      <input type="checkbox" checked="" />
+                    </label>
+                    <h5 class="dsc-note">Brush teeth</h5>
+                  </div>
+                  <div class="right">
+                    <button id="dtl-note" class="btn-light">Details</button>
+                    <span id="fch-simple">Dec 11th</span>
+                    <span class="icon" id="edit-note">
+                      <i class="fa-solid fa-pen-to-square"></i>
+                    </span>
+                    <span class="icon" id="del-note">
+                      <i class="fa-solid fa-trash-can"></i>
+                    </span>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="left">
+                    <label class="cont">
+                      <input type="checkbox" checked="" />
+                    </label>
+                    <h5 class="dsc-note">Brush teeth</h5>
+                  </div>
+                  <div class="right">
+                    <button id="dtl-note" class="btn-light">Details</button>
                     <span id="fch-simple">Dec 11th</span>
                     <span class="icon" id="edit-note">
                       <i class="fa-solid fa-pen-to-square"></i>
@@ -116,18 +210,34 @@
               <div class="details-form">
                 <div class="dates-form">
                   <div class="date-form">
-                    <label for="">Dude Date:</label>
-                    <input type="datetime" name="" id="" />
+                    <label for="datetime">Dude Date:</label>
+                    <input
+                      type="date"
+                      name="datetime"
+                      id="datetime"
+                      class="btn-light"
+                    />
                   </div>
                   <div class="date-form">
                     <label for="">Priority:</label>
-                    <button>Low</button>
-                    <button>Medium</button>
-                    <button>High</button>
+                    <div class="date-form-options">
+                      <label>
+                        <input type="radio" name="radio" />
+                        <span class="btn-light green">Women</span>
+                      </label>
+                      <label>
+                        <input type="radio" name="radio" />
+                        <span class="btn-light orange">Men</span>
+                      </label>
+                      <label>
+                        <input type="radio" name="radio" />
+                        <span class="btn-light red">Divided</span>
+                      </label>
+                    </div>
                   </div>
                 </div>
                 <div class="submit-form">
-                  <button>Add to do</button>
+                  <button class="btn-light">Add to do</button>
                 </div>
               </div>
             </div>
