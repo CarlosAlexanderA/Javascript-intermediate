@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
     <title>Todo List Page</title>
   </head>
   <body>
@@ -13,7 +17,9 @@
             <div class="logo">
               <h1>
                 <span class="title">// TO - DO</span>
-                <div class="icon">S</div>
+                <div class="icon">
+                  <i class="fa-regular fa-file-lines"></i>
+                </div>
               </h1>
             </div>
           </div>
@@ -50,28 +56,83 @@
               </ul>
             </nav>
             <div class="btn-circle">
-              <button type="button">+</button>
+              <button type="button"><i class="fa-solid fa-plus"></i></button>
             </div>
           </aside>
           <div class="main-container">
             <div class="container">
               <div class="list-notes">
                 <div class="card">
-                  <div class="right">
-                    <input type="checkbox" name="" id="" />
+                  <div class="left">
+                    <label class="cont">
+                      <input type="checkbox" checked="" />
+                    </label>
                     <h5 class="dsc-note">Brush teeth</h5>
                   </div>
-                  <div class="left">
+                  <div class="right">
                     <button id="dtl-note">Details</button>
                     <span id="fch-simple">Dec 11th</span>
-                    <span class="icon" id="edit-note">E</span>
-                    <span class="icon" id="del-note">D</span>
+                    <span class="icon" id="edit-note">
+                      <i class="fa-solid fa-pen-to-square"></i>
+                    </span>
+                    <span class="icon" id="del-note">
+                      <i class="fa-solid fa-trash-can"></i>
+                    </span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </main>
+      </div>
+
+      <div class="modal-new-nota">
+        <div class="square-form">
+          <div class="top-square-form">
+            <h2>Create a new....</h2>
+            <div class="icon">
+              <i class="fa-solid fa-x"></i>
+            </div>
+          </div>
+          <aside class="left-form">
+            <ul>
+              <li><span>To Do</span></li>
+              <li><span>Project</span></li>
+              <li><span>Note</span></li>
+            </ul>
+          </aside>
+          <form action="#" class="form-main">
+            <div id="to-do">
+              <div class="text-form">
+                <input type="text" placeholder="Title: Pay bills" />
+                <textarea
+                  name=""
+                  id=""
+                  cols="30"
+                  rows="10"
+                  placeholder="Details: e,g internet, phone, rent."
+                ></textarea>
+              </div>
+              <div class="details-form">
+                <div class="dates-form">
+                  <div class="date-form">
+                    <label for="">Dude Date:</label>
+                    <input type="datetime" name="" id="" />
+                  </div>
+                  <div class="date-form">
+                    <label for="">Priority:</label>
+                    <button>Low</button>
+                    <button>Medium</button>
+                    <button>High</button>
+                  </div>
+                </div>
+                <div class="submit-form">
+                  <button>Add to do</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </body>

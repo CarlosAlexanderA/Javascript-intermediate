@@ -30,6 +30,24 @@ a {
   color: inherit;
   text-decoration: none;
 }
+button {
+  border: none;
+}
+input[type="checkbox"] {
+  width: 1.3em;
+  height: 1.3em;
+}
+input,
+textarea {
+  border: none;
+}
+textarea {
+  resize: none;
+}
+input:focus-visible,
+textarea:focus-visible {
+  outline: none;
+}
 #content {
   width: 100%;
   height: 100vh;
@@ -62,7 +80,7 @@ header.header .logo > h1 {
   flex-grow: 1;
   display: grid;
   grid-template-columns: 1fr 3fr;
-  gap: 2em;
+  gap: 1em;
 }
 main > aside {
   background-color: var(--gray-low);
@@ -95,4 +113,234 @@ main > aside > nav > ul > li > a {
 }
 .number-round > span {
   font-size: 0.9em;
+}
+
+.btn-circle > button {
+  /* background-color: transparent; */
+  color: white;
+  background-color: var(--pink-pale);
+  border-radius: 5em;
+  overflow: hidden;
+  width: 0.8em;
+  height: 0.8em;
+  font-size: 2em;
+  padding: 0.8em;
+  display: grid;
+  place-content: center;
+  box-shadow: 5px 5px 15px -8px rgba(0, 0, 0, 0.75);
+  cursor: pointer;
+}
+
+main .main-container {
+  padding-top: 2em;
+}
+main .main-container .container {
+  height: 100%;
+}
+main .main-container .container > .list-notes {
+  /* background-color: aqua; */
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+}
+
+.list-notes > .card {
+  display: flex;
+  justify-content: space-between;
+  background-color: beige;
+  border-left: 2px solid var(--red);
+  padding: 0.6em 0.5em;
+}
+.list-notes > .card > .left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.7em;
+  color: var(--letter-normal);
+}
+.list-notes > .card > .left > input {
+  accent-color: var(--green-ligth);
+  border: 2px solid red;
+}
+.cont {
+  display: flex;
+  align-items: center;
+  transform: scale(1);
+}
+/* checked */
+input[type="checkbox"] {
+  height: 1.2rem;
+  width: 1.2rem;
+  margin: 5px;
+  display: inline-block;
+  appearance: none;
+  position: relative;
+  background-color: #f2ecff;
+  border-radius: 27%;
+  cursor: pointer;
+  overflow: hidden;
+  border: 0.2em solid var(--green-ligth);
+}
+
+input[type="checkbox"]::after {
+  content: "";
+  display: block;
+  height: 0.45rem;
+  width: 0.2rem;
+  border-bottom: 0.2rem solid #a0ffe7;
+  border-right: 0.2rem solid #a0ffe7;
+  opacity: 0;
+  transform: rotate(45deg) translate(-50%, -50%);
+  position: absolute;
+  top: 47%;
+  left: 18%;
+  transition: 0.25s ease;
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  display: block;
+  height: 0;
+  width: 0;
+  background-color: var(--green-ligth);
+  border-radius: 50%;
+  opacity: 0.5;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transition: 0.3s ease;
+}
+
+input[type="checkbox"]:checked::before {
+  height: 130%;
+  width: 130%;
+  opacity: 100%;
+}
+
+input[type="checkbox"]:checked::after {
+  opacity: 100%;
+}
+/* sadasdas */
+.list-notes > .card > .left > h5 {
+  font-weight: 400;
+  font-size: 0.8rem;
+}
+.list-notes > .card > .right {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+}
+.list-notes > .card > .right > span {
+  font-size: 0.8em;
+  font-weight: 500;
+  color: var(--purple-dark);
+}
+.list-notes > .card > .right > button {
+  background-color: transparent;
+  color: var(--green-ligth);
+  border: 2px solid var(--green-ligth);
+  padding: 0.3em 0.5em;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+#content > .modal-new-nota {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+
+  backdrop-filter: blur(10px);
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#content > .modal-new-nota > .square-form {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: 1fr 3fr;
+  grid-template-areas:
+    "header header"
+    "aside main";
+  background-color: aqua;
+  width: 60%;
+  height: 60%;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+#content > .modal-new-nota > .square-form > .top-square-form {
+  grid-area: header;
+  background-color: var(--pink-pale);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em 2.5em;
+  letter-spacing: 0.15em;
+}
+
+#content > .modal-new-nota > .square-form > aside.left-form {
+  grid-area: aside;
+  background-color: var(--gray-low);
+  padding-top: 1.5em;
+  padding-left: 3em;
+  font-size: 1.4em;
+  color: var(--letter-normal);
+}
+#content > .modal-new-nota > .square-form > aside.left-form > ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7em;
+}
+#content > .modal-new-nota > .square-form > aside.left-form > ul > li > span {
+  font-weight: 300;
+}
+#content > .modal-new-nota > .square-form > .form-main {
+  grid-area: main;
+  background-color: white;
+  padding: 2em;
+}
+.form-main > #to-do {
+  /* background-color: violet; */
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.form-main > #to-do > .text-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+.form-main > #to-do > .text-form > input,
+.form-main > #to-do > .text-form > textarea {
+  outline: none;
+  overflow: hidden;
+  background-color: #f3f3f3;
+  border-radius: 10px;
+  transition: all 0.1s;
+  padding: 0.5em;
+  font-size: 1.2rem;
+}
+
+.form-main > #to-do > .text-form > input:hover,
+.form-main > #to-do > .text-form > input:focus,
+.form-main > #to-do > .text-form > textarea:hover,
+.form-main > #to-do > .text-form > textarea:focus {
+  border: 2px solid #4a9dec;
+  box-shadow: 0px 0px 1px 5px rgb(74, 157, 236, 20%);
+  background-color: white;
+}
+.form-main > #to-do > .details-form {
+  background-color: violet;
+  display: flex;
+  justify-content: space-between;
+}
+.form-main > #to-do > .details-form > .dates-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
 }
