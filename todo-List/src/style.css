@@ -176,11 +176,14 @@ main .main-container .container > .list-notes {
 }
 
 .list-notes > .card {
-  display: flex;
   justify-content: space-between;
   background-color: #eee;
   border-left: 2px solid var(--red);
   padding: 0.6em 0.5em;
+  display: none;
+}
+.list-notes > .card.active {
+  display: flex;
 }
 .list-notes > .card:hover {
   -webkit-transform: scale(1.003);
@@ -312,6 +315,8 @@ input[type="checkbox"]:checked::after {
   height: 60%;
   border-radius: 0.5rem;
   overflow: hidden;
+  position: relative;
+  z-index: 1000;
 }
 #content > .modal-new-nota > .square-form > .top-square-form {
   grid-area: header;
@@ -323,7 +328,10 @@ input[type="checkbox"]:checked::after {
   padding: 1em 2.5em;
   letter-spacing: 0.15em;
 }
-
+#close-modal > i {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
 #content > .modal-new-nota > .square-form > aside.left-form {
   grid-area: aside;
   background-color: var(--gray-low);
