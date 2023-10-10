@@ -25,6 +25,7 @@ module.exports = {
     ],
   },
   plugins: [new HtmlWebpackPlugin({ template: "src/index.html" })],
+  devtool: "source-map", //ayuda en encontrar errores, pero es lenta y proporciona el codigo fuente al usuario
   devServer: {
     open: true, //abrir el navergador
     port: 3100, // puerto de carga
