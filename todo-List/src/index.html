@@ -78,7 +78,7 @@
               </ul>
             </nav>
             <div class="btn-circle">
-              <button type="button" id="add-to-do">
+              <button type="button" id="btn-add">
                 <i class="fa-solid fa-plus"></i>
               </button>
             </div>
@@ -181,8 +181,10 @@
           </div>
         </main>
       </div>
-
-      <div class="modal-new-nota" id="modal-add">
+      <div class="modal" id="modal-edit">
+        <div class="edit-form"></div>
+      </div>
+      <div class="modal" id="modal-add">
         <div class="square-form">
           <div class="top-square-form">
             <h2>Create a new....</h2>
@@ -197,13 +199,18 @@
               <li><span>Note</span></li>
             </ul>
           </aside>
-          <form action="#" class="form-main">
+          <form action="#" class="form-main" id="add-to-do">
             <div id="to-do">
               <div class="text-form">
-                <input type="text" placeholder="Title: Pay bills" />
+                <input
+                  type="text"
+                  placeholder="Title: Pay bills"
+                  name="title"
+                  id="title"
+                />
                 <textarea
-                  name=""
-                  id=""
+                  name="detail"
+                  id="detail"
                   cols="30"
                   rows="10"
                   placeholder="Details: e,g internet, phone, rent."
@@ -224,22 +231,37 @@
                     <label for="">Priority:</label>
                     <div class="date-form-options">
                       <label>
-                        <input type="radio" name="radio" />
-                        <span class="btn-light green">Women</span>
+                        <input
+                          type="radio"
+                          name="priority"
+                          id="lower"
+                          value="lower"
+                        />
+                        <span class="btn-light green">lower</span>
                       </label>
                       <label>
-                        <input type="radio" name="radio" />
-                        <span class="btn-light orange">Men</span>
+                        <input
+                          type="radio"
+                          name="priority"
+                          id="medium"
+                          value="medium"
+                        />
+                        <span class="btn-light orange">medium</span>
                       </label>
                       <label>
-                        <input type="radio" name="radio" />
-                        <span class="btn-light red">Divided</span>
+                        <input
+                          type="radio"
+                          name="priority"
+                          id="high"
+                          value="high"
+                        />
+                        <span class="btn-light red">high</span>
                       </label>
                     </div>
                   </div>
                 </div>
                 <div class="submit-form">
-                  <button class="btn-light">Add to do</button>
+                  <button class="btn-light" type="submit">Add to do</button>
                 </div>
               </div>
             </div>
