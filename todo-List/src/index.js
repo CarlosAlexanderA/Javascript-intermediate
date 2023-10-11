@@ -34,7 +34,13 @@ class ToDo {
   build() {
     const card = document.createElement("div");
     card.id = this.idCard;
-    card.className = "card active";
+    card.className = `card active ${
+      this.priority === "lower"
+        ? "lower"
+        : this.priority === "medium"
+        ? "medium"
+        : "high"
+    }`;
     card.setAttribute("data-name", this.project);
     const checkInput = this.check();
     const left = document.createElement("div");
@@ -61,13 +67,21 @@ class ToDo {
       const allChecked = document.querySelectorAll(
         `.card[data-name='${this.project}'] .cont input[type='checkbox']`
       );
-      const checks = Array.from(allChecked).filter((check) => check.checked);
+      const checks = Array.from(allChecked).filter((check) => !check.checked);
 
       console.log(checks.length);
       const countNote = document.querySelector(
         `main aside nav ul li a[data-name = '${this.project}'] > .number-round > span`
       );
+
       countNote.textContent = checks.length;
+      if (countNote.textContent == 0) {
+        const hideNum = document.querySelector(
+          `main aside nav ul li a[data-name = '${this.project}'] > .number-round`
+        );
+        hideNum.style.display = "none";
+      }
+
       console.log(countNote);
     });
     return checkInput;
@@ -123,27 +137,30 @@ options.forEach((item) => {
     });
   });
 });
-const btnChecked = () => {
-  return document.querySelectorAll(".card .cont input[type='checkbox']");
-};
+//#region Creo que ta no sirve
+// const btnChecked = () => {
+//   return document.querySelectorAll(".card .cont input[type='checkbox']");
+// };
 
-// console.log(btnChecked()[0].parentElement);
+// // console.log(btnChecked()[0].parentElement);
 
-let numcheck = 0;
-let category = "week";
-btnChecked().forEach((btn) => {
-  btn.addEventListener("click", () => {
-    if (btn.checked === true) {
-      numcheck++;
-      console.log(btn);
-      const numberCount = document.querySelector(
-        `main aside nav a[data-name='${category}'] .number-round > span`
-      );
-      console.log(numberCount);
-      numberCount.textContent = numcheck;
-    }
-  });
-});
+// let numcheck = 0;
+// let category = "week";
+// btnChecked().forEach((btn) => {
+//   btn.addEventListener("click", () => {
+//     if (btn.checked === true) {
+//       numcheck++;
+//       console.log(btn);
+//       const numberCount = document.querySelector(
+//         `main aside nav a[data-name='${category}'] .number-round > span`
+//       );
+//       console.log(numberCount);
+//       numberCount.textContent = numcheck;
+//     }
+//   });
+// });
+//#endregion
+
 const play = new ToDo("play", "play with friends", "2022-11-06", "low", "gym");
 const example1 = new ToDo("example1", "example1", "2022-11-06", "low", "week");
 const example2 = new ToDo("example2", "example2", "2022-11-06", "low", "week");
@@ -173,7 +190,7 @@ listNotes.append(
 
 const addToDo = document.getElementById("add-to-do");
 
-addToDo.addEventListener("submit", () => {
+addToDo.addEventListener("submit", (event) => {
   event.preventDefault();
   const formData = new FormData(event.target);
 
@@ -181,10 +198,88 @@ addToDo.addEventListener("submit", () => {
   const detail = formData.get("detail");
   const datetime = formData.get("datetime");
   const priority = formData.get("priority");
-  const project = "gym";
-  console.log(datetime);
+  const project = formData.get("project");
+  console.log(formData);
+  console.log(project);
+
   // console.log(formData);
   const card = new ToDo(title, detail, datetime, priority, project);
   listNotes.appendChild(card.build());
   closeadd();
 });
+class Project {
+  constructor(name) {
+    this.name = name;
+  }
+  build() {
+    const link = document.createElement("li");
+    const options = document.querySelectorAll("main aside nav ul li a");
+    const linkRef = linkListener(options);
+    linkRef.setAttribute("href", "#");
+    linkRef.setAttribute("data-name", this.name);
+    const text = document.createElement("span");
+    text.textContent = this.name.replace(/^\w/, (c) => c.toUpperCase());
+    const numList = document.createElement("div");
+    numList.classList.add("number-round");
+    numList.innerHTML = "<span>0</span>";
+    linkRef.append(text, numList);
+    link.appendChild(linkRef);
+    this.select();
+    return link;
+  }
+  select() {
+    const selectContent = document.getElementById("project");
+    const option = document.createElement("option");
+    option.textContent = this.name;
+    option.value = this.name;
+    selectContent.appendChild(option);
+  }
+}
+const linkListener = (links) => {
+  const aLink = document.createElement("a");
+  aLink.addEventListener("click", () => {
+    const options = links;
+    options.forEach((item) => item.classList.remove("active"));
+    aLink.classList.add("active");
+    let filterName = aLink.dataset.name;
+    notesList().forEach((note) => {
+      const nameNote = note.dataset.name;
+      if (filterName === nameNote || filterName === "all") {
+        if (!note.classList.contains("active")) note.classList.add("active");
+      } else {
+        note.classList.remove("active");
+      }
+    });
+    console.log(options);
+  });
+
+  return aLink;
+};
+
+const aPRueba = new Project("hello");
+// console.log(aPRueba.build().children);
+const projectLinks = document.querySelector(
+  "main aside nav ul li a.other-list ~ ul"
+);
+projectLinks.appendChild(aPRueba.build());
+// console.log(projectLinks);
+
+const modalOptions = document.querySelector("#modal-add .left-form > ul");
+// console.log(modalOptions);
+
+for (let i = 0; i < 3; i++) {
+  const li = document.createElement("li");
+  const option = document.querySelectorAll("#modal-add .left-form  ul li a");
+  console.log(option);
+  const a = linkListener(option);
+  const span = document.createElement("span");
+  span.textContent = `${i === 0 ? "To Do" : i === 1 ? "Project" : "Notes"}`;
+  span.setAttribute(
+    "data-name",
+    `${i === 0 ? "to-do" : i === 1 ? "project" : "notes"}`
+  );
+  a.appendChild(span);
+
+  li.appendChild(a);
+  modalOptions.appendChild(li);
+}
