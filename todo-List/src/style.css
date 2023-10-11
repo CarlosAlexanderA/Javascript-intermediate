@@ -371,8 +371,12 @@ input[type="checkbox"]:checked::after {
   grid-area: main;
   background-color: white;
   padding: 2em;
+  display: none;
 }
-.form-main > #to-do {
+#content > .modal > .square-form > form.active {
+  display: block;
+}
+.form-main > .to-do {
   /* background-color: violet; */
   height: 100%;
   width: 100%;
@@ -380,13 +384,13 @@ input[type="checkbox"]:checked::after {
   flex-direction: column;
   justify-content: space-between;
 }
-.form-main > #to-do > .text-form {
+.form-main > .to-do > .text-form {
   display: flex;
   flex-direction: column;
   gap: 2em;
 }
-.form-main > #to-do > .text-form > input,
-.form-main > #to-do > .text-form > textarea {
+.form-main > .to-do > .text-form > input,
+.form-main > .to-do > .text-form > textarea {
   outline: none;
   overflow: hidden;
   background-color: #f3f3f3;
@@ -396,24 +400,24 @@ input[type="checkbox"]:checked::after {
   font-size: 1.2rem;
 }
 
-.form-main > #to-do > .text-form > input:hover,
-.form-main > #to-do > .text-form > input:focus,
-.form-main > #to-do > .text-form > textarea:hover,
-.form-main > #to-do > .text-form > textarea:focus {
+.form-main > .to-do > .text-form > input:hover,
+.form-main > .to-do > .text-form > input:focus,
+.form-main > .to-do > .text-form > textarea:hover,
+.form-main > .to-do > .text-form > textarea:focus {
   border: 2px solid #4a9dec;
   box-shadow: 0px 0px 1px 5px rgb(74, 157, 236, 20%);
   background-color: white;
 }
-.form-main > #to-do > .details-form {
+.form-main > .to-do > .details-form {
   display: flex;
   justify-content: space-between;
 }
-.form-main > #to-do > .details-form > .dates-form {
+.form-main > .to-do > .details-form > .dates-form {
   display: flex;
   flex-direction: column;
   gap: 0.5em;
 }
-.form-main > #to-do > .details-form > .dates-form > .date-form {
+.form-main > .to-do > .details-form > .dates-form > .date-form {
   display: flex;
   gap: 1em;
 }

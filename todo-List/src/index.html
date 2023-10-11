@@ -49,24 +49,7 @@
                 <li>
                   <a href="#" class="other-list">Projects</a>
                   <ul>
-                    <li>
-                      <a href="#" data-name="gym">
-                        <span>Gym</span>
-                        <div class="number-round"><span>0</span></div>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <span>Gym</span>
-                        <div class="number-round"><span>0</span></div>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <span>Gym</span>
-                        <div class="number-round"><span>0</span></div>
-                      </a>
-                    </li>
+                    <!-- navegacion por links y categorias practicamente -->
                   </ul>
                 </li>
                 <li>
@@ -194,13 +177,16 @@
           </div>
           <aside class="left-form">
             <ul>
-              <li><span>To Do</span></li>
-              <li><span>Project</span></li>
-              <li><span>Note</span></li>
+              <!-- nevegacion del modal de add project y add todo -->
             </ul>
           </aside>
-          <form action="#" class="form-main" id="add-to-do">
-            <div id="to-do">
+          <form
+            action="#"
+            class="form-main active"
+            id="add-to-do"
+            data-name="to-do"
+          >
+            <div class="to-do">
               <div class="text-form">
                 <input
                   type="text"
@@ -274,77 +260,24 @@
               </div>
             </div>
           </form>
-          <form action="#" class="form-main" id="add-project">
-            <div id="to-do">
+          <form
+            action="#"
+            class="form-main"
+            id="add-project"
+            data-name="project"
+          >
+            <div class="to-do">
               <div class="text-form">
                 <input
                   type="text"
-                  placeholder="Title: Pay bills"
-                  name="title"
-                  id="title"
+                  placeholder="Name of Project"
+                  name="name"
+                  id="name"
                 />
-                <textarea
-                  name="detail"
-                  id="detail"
-                  cols="30"
-                  rows="10"
-                  placeholder="Details: e,g internet, phone, rent."
-                ></textarea>
               </div>
               <div class="details-form">
-                <div class="dates-form">
-                  <div class="date-form">
-                    <label for="datetime">Dude Date:</label>
-                    <input
-                      type="date"
-                      name="datetime"
-                      id="datetime"
-                      class="btn-light"
-                    />
-                  </div>
-                  <div class="date-form">
-                    <label for="">Priority:</label>
-                    <div class="date-form-options">
-                      <label>
-                        <input
-                          type="radio"
-                          name="priority"
-                          id="lower"
-                          value="lower"
-                        />
-                        <span class="btn-light green">lower</span>
-                      </label>
-                      <label>
-                        <input
-                          type="radio"
-                          name="priority"
-                          id="medium"
-                          value="medium"
-                        />
-                        <span class="btn-light orange">medium</span>
-                      </label>
-                      <label>
-                        <input
-                          type="radio"
-                          name="priority"
-                          id="high"
-                          value="high"
-                        />
-                        <span class="btn-light red">high</span>
-                      </label>
-                    </div>
-                  </div>
-                </div>
-                <div class="project-form">
-                  <select id="project" class="btn-light" name="project">
-                    <option value="gym">gym</option>
-                    <option value="nose">nose</option>
-                    <option value="vw">VW</option>
-                    <option value="audi">Audi</option>
-                  </select>
-                </div>
                 <div class="submit-form">
-                  <button class="btn-light" type="submit">Add to do</button>
+                  <button class="btn-light" type="submit">Add Project</button>
                 </div>
               </div>
             </div>

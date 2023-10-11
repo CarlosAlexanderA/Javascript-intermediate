@@ -71,13 +71,13 @@ class ToDo {
 
       console.log(checks.length);
       const countNote = document.querySelector(
-        `main aside nav ul li a[data-name = '${this.project}'] > .number-round > span`
+        `main aside nav ul li a.other-list ~ ul li a[data-name = '${this.project}'] > .number-round > span`
       );
 
       countNote.textContent = checks.length;
       if (countNote.textContent == 0) {
         const hideNum = document.querySelector(
-          `main aside nav ul li a[data-name = '${this.project}'] > .number-round`
+          `main aside nav ul li a.other-list ~ ul li a[data-name = '${this.project}'] > .number-round`
         );
         hideNum.style.display = "none";
       }
@@ -110,56 +110,9 @@ class ToDo {
   }
   modal() {}
 }
-const options = document.querySelectorAll("main aside nav ul li a");
-// console.log(options);
 const notesList = () => {
   return document.querySelectorAll("main .main-container .list-notes .card");
 };
-// console.log(notesList()[0].classList.contains("active"));
-const elementById = (id) => {
-  return document.getElementById(id);
-};
-options.forEach((item) => {
-  item.addEventListener("click", () => {
-    options.forEach((item) => item.classList.remove("active"));
-    item.classList.toggle("active");
-    let filterName = item.dataset.name;
-    notesList().forEach((note) => {
-      const nameNote = note.dataset.name;
-      console.log(nameNote);
-      if (filterName === nameNote || filterName === "all") {
-        if (!note.classList.contains("active")) {
-          note.classList.add("active");
-        }
-      } else {
-        note.classList.remove("active");
-      }
-    });
-  });
-});
-//#region Creo que ta no sirve
-// const btnChecked = () => {
-//   return document.querySelectorAll(".card .cont input[type='checkbox']");
-// };
-
-// // console.log(btnChecked()[0].parentElement);
-
-// let numcheck = 0;
-// let category = "week";
-// btnChecked().forEach((btn) => {
-//   btn.addEventListener("click", () => {
-//     if (btn.checked === true) {
-//       numcheck++;
-//       console.log(btn);
-//       const numberCount = document.querySelector(
-//         `main aside nav a[data-name='${category}'] .number-round > span`
-//       );
-//       console.log(numberCount);
-//       numberCount.textContent = numcheck;
-//     }
-//   });
-// });
-//#endregion
 
 const play = new ToDo("play", "play with friends", "2022-11-06", "low", "gym");
 const example1 = new ToDo("example1", "example1", "2022-11-06", "low", "week");
@@ -171,8 +124,6 @@ const example6 = new ToDo("example6", "example6", "2022-11-06", "low", "today");
 const example7 = new ToDo("example7", "example7", "2022-11-06", "low", "gym");
 const example8 = new ToDo("example8", "example8", "2022-11-06", "low", "gym");
 
-// console.log(play.build());
-// console.log(play.project);
 const listNotes = document.querySelector(".main-container .list-notes");
 listNotes.append(
   play.build(),
@@ -214,7 +165,7 @@ class Project {
   build() {
     const link = document.createElement("li");
     const options = document.querySelectorAll("main aside nav ul li a");
-    const linkRef = linkListener(options);
+    const linkRef = linkListener(options, notesList());
     linkRef.setAttribute("href", "#");
     linkRef.setAttribute("data-name", this.name);
     const text = document.createElement("span");
@@ -235,14 +186,14 @@ class Project {
     selectContent.appendChild(option);
   }
 }
-const linkListener = (links) => {
+const linkListener = (links, notes) => {
   const aLink = document.createElement("a");
   aLink.addEventListener("click", () => {
     const options = links;
     options.forEach((item) => item.classList.remove("active"));
     aLink.classList.add("active");
     let filterName = aLink.dataset.name;
-    notesList().forEach((note) => {
+    notes.forEach((note) => {
       const nameNote = note.dataset.name;
       if (filterName === nameNote || filterName === "all") {
         if (!note.classList.contains("active")) note.classList.add("active");
@@ -270,11 +221,13 @@ const modalOptions = document.querySelector("#modal-add .left-form > ul");
 for (let i = 0; i < 3; i++) {
   const li = document.createElement("li");
   const option = document.querySelectorAll("#modal-add .left-form  ul li a");
+  const formList = document.querySelectorAll("#modal-add .square-form form");
+  console.log(formList);
   console.log(option);
-  const a = linkListener(option);
+  const a = linkListener(option, formList);
   const span = document.createElement("span");
   span.textContent = `${i === 0 ? "To Do" : i === 1 ? "Project" : "Notes"}`;
-  span.setAttribute(
+  a.setAttribute(
     "data-name",
     `${i === 0 ? "to-do" : i === 1 ? "project" : "notes"}`
   );
@@ -283,3 +236,21 @@ for (let i = 0; i < 3; i++) {
   li.appendChild(a);
   modalOptions.appendChild(li);
 }
+
+const addProject = document.getElementById("add-project");
+
+addProject.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const formData = new FormData(event.target);
+
+  const name = formData.get("name");
+
+  console.log(formData);
+  console.log(name);
+
+  // console.log(formData);
+  const project = new Project(name);
+  projectLinks.appendChild(project.build());
+
+  closeadd();
+});
