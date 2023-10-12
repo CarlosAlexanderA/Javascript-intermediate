@@ -364,9 +364,7 @@ input[type="checkbox"]:checked::after {
   flex-direction: column;
   gap: 0.7em;
 }
-#content > .modal > .square-form > aside.left-form > ul > li > span {
-  font-weight: 300;
-}
+
 #content > .modal > .square-form > .form-main {
   grid-area: main;
   background-color: white;
@@ -498,4 +496,17 @@ label {
 .details-form > .project-form {
   display: flex;
   align-items: end;
+}
+
+#modal-add > .square-form > aside.left-form ul > li a:hover > span,
+#modal-add > .square-form > aside.left-form ul > li a.active > span {
+  color: var(--purple-dark);
+  font-weight: 500;
+  font-size: 1.2em;
+}
+#modal-add > .square-form > aside.left-form ul > li a.active > span::before,
+#modal-add > .square-form > aside.left-form ul > li a:hover > span::before {
+  content: "//";
+  font-size: 0.8em;
+  margin-right: 0.4em;
 }

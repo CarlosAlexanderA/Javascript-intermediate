@@ -69,17 +69,19 @@ class ToDo {
       );
       const checks = Array.from(allChecked).filter((check) => !check.checked);
 
-      console.log(checks.length);
+      console.log(checks);
       const countNote = document.querySelector(
         `main aside nav ul li a.other-list ~ ul li a[data-name = '${this.project}'] > .number-round > span`
       );
 
       countNote.textContent = checks.length;
+      const hideNum = document.querySelector(
+        `main aside nav ul li a.other-list ~ ul li a[data-name = '${this.project}'] > .number-round`
+      );
       if (countNote.textContent == 0) {
-        const hideNum = document.querySelector(
-          `main aside nav ul li a.other-list ~ ul li a[data-name = '${this.project}'] > .number-round`
-        );
         hideNum.style.display = "none";
+      } else {
+        hideNum.style.display = "flex";
       }
 
       console.log(countNote);
@@ -156,6 +158,7 @@ addToDo.addEventListener("submit", (event) => {
   // console.log(formData);
   const card = new ToDo(title, detail, datetime, priority, project);
   listNotes.appendChild(card.build());
+
   closeadd();
 });
 class Project {
@@ -164,7 +167,7 @@ class Project {
   }
   build() {
     const link = document.createElement("li");
-    const options = document.querySelectorAll("main aside nav ul li a");
+    const options = "main aside nav ul a.other-list ~ ul > li > a";
     const linkRef = linkListener(options, notesList());
     linkRef.setAttribute("href", "#");
     linkRef.setAttribute("data-name", this.name);
@@ -172,7 +175,12 @@ class Project {
     text.textContent = this.name.replace(/^\w/, (c) => c.toUpperCase());
     const numList = document.createElement("div");
     numList.classList.add("number-round");
-    numList.innerHTML = "<span>0</span>";
+    const allChecked = document.querySelectorAll(
+      `.card[data-name='${this.project}'] .cont input[type='checkbox']`
+    );
+    const checks = Array.from(allChecked).filter((check) => !check.checked);
+
+    numList.innerHTML = `<span>${checks.length}</span>`;
     linkRef.append(text, numList);
     link.appendChild(linkRef);
     this.select();
@@ -189,8 +197,12 @@ class Project {
 const linkListener = (links, notes) => {
   const aLink = document.createElement("a");
   aLink.addEventListener("click", () => {
-    const options = links;
-    options.forEach((item) => item.classList.remove("active"));
+    const options = document.querySelectorAll(links);
+    options.forEach((item) => {
+      item.classList.remove("active");
+      console.log(item);
+    });
+    console.log(links);
     aLink.classList.add("active");
     let filterName = aLink.dataset.name;
     notes.forEach((note) => {
@@ -201,18 +213,21 @@ const linkListener = (links, notes) => {
         note.classList.remove("active");
       }
     });
-    console.log(options);
+    // console.log(options);
   });
 
   return aLink;
 };
 
 const aPRueba = new Project("hello");
+const prueba2 = new Project("prueba2");
+const prueba3 = new Project("prueba3");
+
 // console.log(aPRueba.build().children);
 const projectLinks = document.querySelector(
   "main aside nav ul li a.other-list ~ ul"
 );
-projectLinks.appendChild(aPRueba.build());
+projectLinks.append(aPRueba.build(), prueba2.build(), prueba3.build());
 // console.log(projectLinks);
 
 const modalOptions = document.querySelector("#modal-add .left-form > ul");
@@ -220,7 +235,7 @@ const modalOptions = document.querySelector("#modal-add .left-form > ul");
 
 for (let i = 0; i < 3; i++) {
   const li = document.createElement("li");
-  const option = document.querySelectorAll("#modal-add .left-form  ul li a");
+  const option = "#modal-add .left-form  ul li a";
   const formList = document.querySelectorAll("#modal-add .square-form form");
   console.log(formList);
   console.log(option);
