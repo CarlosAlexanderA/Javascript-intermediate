@@ -38,13 +38,43 @@ const images = document.querySelectorAll(
 const buttonsMove = document.querySelectorAll(
   '#carrusel-img  .images > .buttons > button'
 );
+const leftInitialImages = () => {
+  let porcetLeft = 0;
 
-buttonsMove.forEach((btn, index) => {
+  images.forEach((image) => {
+    console.log(porcetLeft);
+    image.style.left = `${porcetLeft}%`;
+    porcetLeft += 100;
+  });
+};
+leftInitialImages();
+buttonsMove.forEach((btn) => {
   btn.addEventListener('click', () => {
+    images.forEach((item) => item.classList.remove('active'));
+
+    console.log(btn.id);
+    images.forEach((img) => {
+      const actualLeft = parseFloat(img.style.left);
+
+      let newLeft = 0;
+      if (btn.id === 'btn-right') newLeft = actualLeft - 100;
+      else newLeft = actualLeft + 100;
+
+      img.style.left = newLeft + '%';
+
+      if (newLeft === 0) {
+        img.classList.add('active');
+      }
+      // if (images[images.length - 1].classList.contains('active')) {
+      //   leftInitialImages();
+      // }
+    });
     const imageActive = Array.from(images).filter((item) =>
       item.classList.contains('active')
     );
+    if (imageActive.length === 0) {
+      leftInitialImages();
+    }
     console.log(imageActive);
-    console.log(images[0].offsetWidth);
   });
 });
