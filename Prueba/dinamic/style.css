@@ -1,0 +1,185 @@
+* {
+  padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+}
+body {
+  height: 100vh;
+  width: 100vw;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+.container {
+  margin: 0 auto;
+  width: 85%;
+}
+header {
+  background-color: rgb(31, 31, 41);
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em 0;
+  color: white;
+}
+header nav > ul {
+  display: flex;
+  gap: 1em;
+  position: relative;
+}
+header nav > ul li a {
+  padding: 0.5em 1em;
+}
+header nav > ul li a:hover {
+  background-color: rgb(73, 73, 85);
+}
+header nav > ul li a ~ ul.drop-down.hidden {
+  display: none;
+}
+header nav > ul li a ~ ul.drop-down {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2em;
+  color: white;
+  margin: 1em 0;
+  background-color: rgba(31, 31, 41, 0.781);
+  border-radius: 0.3em;
+}
+header nav > ul li a ~ ul.drop-down li a {
+  padding: 0.7em 2em;
+  display: block;
+}
+header nav > ul li a.active {
+  background-color: rgb(110, 110, 121);
+}
+
+main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+#menu-mobile {
+  padding: 2rem 0;
+  /* position: relative;
+  height: 100%; */
+}
+#menu-mobile .icon {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 2.5rem;
+  height: 2rem;
+  cursor: pointer;
+  /* background-color: rgba(250, 128, 114, 0.473); */
+  justify-content: space-between;
+  position: relative;
+  z-index: 100;
+}
+
+#menu-mobile .icon > .line1.active {
+  top: 40%;
+  position: absolute;
+  transform: rotate(45deg);
+  background-color: white;
+}
+#menu-mobile .icon > .line3.active {
+  bottom: 35%;
+  position: absolute;
+  transform: rotate(-45deg);
+  background-color: white;
+}
+#menu-mobile .icon > .line2.active {
+  display: none;
+}
+#menu-mobile .icon > .line {
+  width: 100%;
+  height: 0.5rem;
+  background-color: black;
+  border-radius: 0.5em;
+  transition: all 0.2s linear;
+}
+#menu-mobile nav.active {
+  display: block;
+  left: 0;
+}
+#menu-mobile nav {
+  display: block;
+  background-color: aqua;
+  position: absolute;
+  top: 0;
+  left: -50%;
+  background-color: #1a1919;
+  color: white;
+  padding: 6rem 4rem;
+  width: 50%;
+  height: 100%;
+  transition: all 0.4s ease;
+}
+#menu-mobile nav > ul {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.3rem;
+  gap: 1em;
+}
+#carrusel-img {
+}
+#carrusel-img .images {
+  display: flex;
+  margin: 1em 5em;
+  position: relative;
+}
+#carrusel-img .images > .content-images {
+  background-color: blanchedalmond;
+  width: 100%;
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#carrusel-img .images > .content-images > img {
+  width: 100%;
+  height: 90%;
+  position: absolute;
+  object-fit: cover;
+  top: 0;
+}
+#carrusel-img .images > .content-images img:nth-child(2) {
+  top: 50%;
+  left: 100%;
+}
+#carrusel-img .images > .content-images img:nth-child(3) {
+  top: 100%;
+  left: 200%;
+}
+#carrusel-img .images > .buttons {
+  position: absolute;
+  background-color: #1a191933;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#carrusel-img .images > .buttons > button {
+  font-size: 4.5rem;
+  background-color: transparent;
+  padding: 0.1em 0.2em;
+  cursor: pointer;
+  border: none;
+  color: white;
+}
+#carrusel-img .images > .buttons > button:hover {
+  background-color: rgba(255, 255, 255, 0.274);
+}

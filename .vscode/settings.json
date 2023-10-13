@@ -1,3 +1,8 @@
 {
-    "liveServer.settings.ChromeDebuggingAttachment": false
+  "liveServer.settings.ChromeDebuggingAttachment": false,
+
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.validate": ["javascript"]
 }

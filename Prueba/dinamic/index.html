@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <title>Menu desplegable</title>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="logo">
+          <h1>Menu Drop Down</h1>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Gallery</a></li>
+            <li id="service">
+              <a href="#">Services</a>
+              <ul class="drop-down hidden">
+                <li><a href="#">Example 1</a></li>
+                <li><a href="#">Example 1</a></li>
+                <li><a href="#">Example 1</a></li>
+                <li><a href="#">Example 1</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <div id="menu-mobile">
+        <div class="container">
+          <div class="icon">
+            <div class="line line1"></div>
+            <div class="line line2"></div>
+            <div class="line line3"></div>
+          </div>
+          <nav class="">
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Info</a></li>
+              <li><a href="#">Contact</a></li>
+              <li><a href="#">Show me more</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div id="carrusel-img">
+        <div class="container">
+          <div class="images">
+            <div class="content-images">
+              <img
+                src="https://images.unsplash.com/photo-1558637845-c8b7ead71a3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8MTYlM0E5fGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"
+                alt=""
+                class="active"
+              />
+              <img
+                src="https://images.unsplash.com/photo-1580757468214-c73f7062a5cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8MTYlM0E5fGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"
+                alt=""
+              />
+              <img
+                src="https://images.unsplash.com/photo-1594568284297-7c64464062b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8MTYlM0E5fGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"
+                alt=""
+              />
+            </div>
+            <div class="buttons">
+              <button id="btn-left">
+                <i class="fa-solid fa-chevron-left"></i>
+              </button>
+              <button id="btn-right">
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
