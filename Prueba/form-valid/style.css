@@ -1,0 +1,118 @@
+* {
+  padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+}
+body {
+  height: 100vh;
+  width: 100vw;
+  font-family: sans-serif;
+  background-color: #212121;
+}
+.container {
+  margin: 0 10%;
+}
+
+.square-form {
+  display: flex;
+  flex-direction: column;
+  background-color: #1a1a1a;
+  color: #fffb;
+  padding: 1.5em;
+  border-radius: 1em;
+  border: 1px solid #333;
+  width: 380px;
+  gap: 0.8em;
+}
+.square-form .title {
+  font-size: 1.5em;
+  color: #00bfff;
+}
+.square-form h2.title::before {
+  content: '';
+  background-color: #00bfff;
+  width: 1rem;
+  height: 1rem;
+}
+.square-form > p {
+  font-weight: 100;
+}
+
+.square-form > form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+.square-form > form > label {
+  position: relative;
+  display: flex;
+  justify-content: stretch;
+  align-items: center;
+}
+.square-form > form > label > input {
+  background-color: #212121;
+  border: 1px solid rgba(105, 105, 105, 0.397);
+  border-radius: 0.5em;
+  font-size: 1em;
+  width: 100%;
+  color: white;
+  padding: 1rem 0.8rem;
+  outline: none;
+}
+.square-form > form > label > input[type='number'] {
+  appearance: textfield !important;
+  -webkit-appearance: textfield !important;
+  margin: 0;
+  -moz-appearance: textfield !important;
+}
+.square-form > form > label > span {
+  position: absolute;
+  padding: 0 0.8rem;
+  font-size: 0.8em;
+  transition: 0.3s ease;
+}
+.square-form > form > label > input:placeholder-shown + span {
+  top: 1.5em;
+  font-size: 0.8em;
+}
+
+.square-form form > label > input:focus + span,
+.square-form form > label > input:valid + span {
+  color: #00bfff;
+  top: 0.1em;
+  font-size: 0.7em;
+  font-weight: 600;
+}
+.square-form form > label > input.invalid + span {
+  color: #f00;
+}
+.square-form > form > label > select {
+  background-color: #212121;
+  border: 1px solid rgba(105, 105, 105, 0.397);
+  border-radius: 0.5em;
+  font-size: 0.8em;
+  width: 100%;
+  color: #fffb;
+  padding: 1rem 0.8rem;
+  outline: none;
+}
+
+.square-form > form > button {
+  background-color: #00bfff;
+  color: white;
+  font-weight: 800;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.7em;
+  padding: 0.7em;
+  transition: 0.2s ease;
+}
+.square-form > form > button:hover {
+  background-color: #00bfff96;
+}
+.square-form form > p.sigin > a {
+  color: #00bfff;
+}
+.square-form form > p.sigin > a:hover {
+  text-decoration: underline royalblue;
+}
