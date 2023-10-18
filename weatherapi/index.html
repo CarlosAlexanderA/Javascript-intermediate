@@ -22,12 +22,17 @@
             <div class="icon"><i class="fas fa-rainbow"></i></div>
             <h3>Weather</h3>
           </div>
-          <form class="search" method="#">
-            <input type="text" />
+          <form class="search" method="#" id="search-location">
+            <input
+              type="text"
+              placeholder="Search location"
+              id="name"
+              name="name"
+            />
             <button type="submit"><i class="fas fa-search"></i></button>
           </form>
           <div class="temperature">
-            <button>°C, m/s</button>
+            <button class="active">°C, m/s</button>
             <button>°F, mph</button>
           </div>
         </nav>
@@ -36,57 +41,70 @@
         <div class="container">
           <div class="card-clima">
             <div class="top">
-              <h1 class="title">Amsterdam, NAasdasd</h1>
-              <p>fecha de hoy o nose</p>
+              <h1 class="title">
+                <span id="name-location">Amsterdam</span>,
+                <span id="country"></span>
+              </h1>
+              <p class="text-w-50">
+                <span id="date">17 de octubre de 2023</span> |
+                <span id="hour">29:23</span>
+              </p>
             </div>
             <div class="description">
               <div class="simple">
                 <div class="giant">
-                  <i class="fas fa-cloud"></i>
-                  <h2>19°C</h2>
+                  <!-- <i class="fas fa-cloud"></i> -->
+                  <div class="icon">
+                    <img src="" alt="temp" id="img-temp" />
+                  </div>
+                  <h2 id="temperature">19°C</h2>
                 </div>
                 <div class="normal">
-                  <h4>Overcast clouds</h4>
-                  <p>Feel like 19°C</p>
-                  <p>Gentle breeze</p>
+                  <h4 id="data-temp">Overcast clouds</h4>
+                  <p class="text-w-50">
+                    Feel like <span id="feel-like">9.9C</span>
+                  </p>
+                  <p class="text-w-50">Gentle breeze</p>
                 </div>
               </div>
               <div class="boxs">
                 <div class="box">
-                  <p>wind</p>
-                  <h3><i class="fas fa-wind"></i> 5m/s</h3>
+                  <p class="text-w-50">wind</p>
+                  <h3>
+                    <i class="fas fa-wind"></i> <span id="wind">5m/s</span>
+                  </h3>
                 </div>
                 <div class="box">
-                  <p>wind</p>
-                  <h3><i class="fas fa-wind"></i> 5m/s</h3>
+                  <p class="text-w-50">Humidity</p>
+                  <h3><span id="humidity">72%</span></h3>
                 </div>
                 <div class="box">
-                  <p>wind</p>
-                  <h3><i class="fas fa-wind"></i> 5m/s</h3>
+                  <p class="text-w-50">UV index</p>
+                  <h3><span id="uv">0</span></h3>
                 </div>
                 <div class="box">
-                  <p>wind</p>
-                  <h3><i class="fas fa-wind"></i> 5m/s</h3>
+                  <p class="text-w-50">Visibility</p>
+                  <h3><span id="visibility">10km</span></h3>
                 </div>
                 <div class="box">
-                  <p>wind</p>
-                  <h3><i class="fas fa-wind"></i> 5m/s</h3>
+                  <p class="text-w-50">Pressure</p>
+                  <h3><span id="pressure">1010</span></h3>
                 </div>
                 <div class="box">
-                  <p>wind</p>
-                  <h3><i class="fas fa-wind"></i> 5m/s</h3>
+                  <p class="text-w-50">Gust</p>
+                  <h3><span id="gust">30km</span></h3>
                 </div>
                 <div class="box">
-                  <p>wind</p>
-                  <h3><i class="fas fa-wind"></i> 5m/s</h3>
+                  <p class="text-w-50">Is Day</p>
+                  <h3><span id="is-day">yes</span></h3>
                 </div>
                 <div class="box">
-                  <p>wind</p>
-                  <h3><i class="fas fa-wind"></i> 5m/s</h3>
+                  <p class="text-w-50">Chance of rain</p>
+                  <h3><span id="chance-rain">0%</span></h3>
                 </div>
                 <div class="box">
-                  <p>maxing Crecent</p>
-                  <h3><i class="fas fa-star-and-crescent"></i></h3>
+                  <p class="text-w-50">Precipitation</p>
+                  <h3><span id="precip">0</span></h3>
                 </div>
               </div>
             </div>

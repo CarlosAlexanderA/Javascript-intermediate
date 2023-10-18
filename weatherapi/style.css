@@ -14,8 +14,13 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-weight: 500;
 }
-
+input,
+button {
+  border: none;
+  outline: none;
+}
 body {
   width: 100vw;
   height: 100vh;
@@ -29,7 +34,7 @@ body {
   color: var(--white);
 }
 header.header {
-  background-color: #7eb35655;
+  /* background-color: #7eb35655; */
   margin: 1rem 0s;
 }
 header.header > nav {
@@ -45,4 +50,109 @@ header.header > nav > .logo {
 }
 header.header > nav > .logo > h3 {
   font-weight: 500;
+}
+header.header > nav > form.search {
+  background-color: var(--dark-blue);
+  width: 20rem;
+  /* height: 2rem; */
+  border-radius: 1rem;
+  overflow: hidden;
+  display: flex;
+  justify-content: stretch;
+  align-items: stretch;
+  padding: 0.5em;
+}
+header.header > nav > form.search > input {
+  width: 90%;
+  padding: 0 0.5em;
+}
+header.header > nav > form.search > button {
+  width: 10%;
+}
+header.header > nav > form.search > input,
+header.header > nav > form.search > button {
+  background-color: transparent;
+  font-size: 1.3rem;
+  color: white;
+}
+
+header.header > nav > .temperature > button {
+  background-color: var(--dark-blue);
+  color: white;
+  font-size: 1.2rem;
+  padding: 0.5em 1em;
+  border-radius: 1em;
+  font-weight: 500;
+  transition: border 0.5s ease;
+  border: 0.2em solid var(--dark-blue);
+}
+header.header > nav > .temperature > button:hover,
+header.header > nav > .temperature > button.active {
+  border: 0.2em solid var(--white);
+}
+.text-w-50 {
+  color: rgba(255, 255, 255, 0.5);
+}
+main .container {
+  width: 50%;
+  /* background-color: #ed860733; */
+  margin: 0 auto;
+}
+main .container > .card-clima {
+  display: flex;
+  flex-direction: column;
+  margin: 1.5rem 0;
+  gap: 1rem;
+}
+main .container > .card-clima > .top {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+main .container > .card-clima > .top > h1.title {
+  font-size: 2rem;
+  font-weight: 500;
+}
+main .container > .card-clima > .top > p {
+  font-size: 1.2rem;
+}
+main .container > .card-clima > .description {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+}
+main .container > .card-clima > .description > .simple {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 30%;
+}
+main .container > .card-clima > .description > .simple > .giant {
+  font-size: 2.5rem;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+}
+main .container > .card-clima > .description > .simple > .giant > .icon {
+  width: 5rem;
+  flex: 1 1 auto;
+}
+main .container > .card-clima > .description > .simple > .giant img {
+  width: 100%;
+}
+main .container > .card-clima > .description > .boxs {
+  width: 70%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 1rem;
+}
+main .container > .card-clima > .description > .boxs > .box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+}
+main .container > .card-clima > .description > .boxs > .box > h3 {
+  font-size: 1.5rem;
 }
