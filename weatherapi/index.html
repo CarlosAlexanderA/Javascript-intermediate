@@ -32,12 +32,18 @@
             <button type="submit"><i class="fas fa-search"></i></button>
           </form>
           <div class="temperature">
-            <button class="active">°C, m/s</button>
-            <button>°F, mph</button>
+            <button class="active" id="cls">°C, m/s</button>
+            <button id="fhrt">°F, mph</button>
           </div>
         </nav>
       </header>
       <main>
+        <div id="loader">
+          <i class="fa-solid fa-spinner fa-spin"></i>
+        </div>
+        <div id="error-container">
+          <h2>asdadasd</h2>
+        </div>
         <div class="container">
           <div class="card-clima">
             <div class="top">

@@ -1,5 +1,12 @@
 // const title = document.querySelector('h1');
 const search = document.getElementById('search-location');
+const btnScaleTemp = document.querySelectorAll(
+  'header.header > nav > .temperature > button'
+);
+const loader = document.getElementById('loader');
+const containerMain = document.querySelector('main > .container');
+const errorContainer = document.getElementById('error-container');
+
 let tempScale = 'cls';
 async function getJsonLocation(name) {
   const response = await fetch(
@@ -23,7 +30,21 @@ search.addEventListener('submit', (event) => {
 
   dataChange(name, tempScale);
 });
+btnScaleTemp.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    btnScaleTemp.forEach((clear) => clear.classList.remove('active'));
+    btn.classList.add('active');
+
+    tempScale = btn.id === 'cls' ? 'cls' : 'fhrt';
+    const nameValue = document.getElementById('name');
+    // console.log(tempScale);
+    // console.log(typeof nameValue.value);
+    dataChange(nameValue.value, tempScale);
+  });
+});
 const dataChange = (name, temp) => {
+  containerMain.classList.remove('active');
+  loader.classList.add('active');
   const nameLocation = document.getElementById('name-location');
   const country = document.getElementById('country');
   const date = document.getElementById('date');
@@ -38,37 +59,55 @@ const dataChange = (name, temp) => {
   const isDay = document.getElementById('is-day');
   const gust = document.getElementById('gust');
   const chanceRain = document.getElementById('chance-rain');
-  getJsonLocation(name).then((data) => {
-    const datetime = new Date(data.location.localtime);
-    const dayName = getDayName(datetime.getDay());
-    const monthName = getMonthName(datetime.getMonth());
-    const hourSimple = `${datetime.getHours()}:${datetime.getMinutes()}`;
-    const imageTemp = document.getElementById('img-temp');
-    const wind = document.getElementById('wind');
-    nameLocation.textContent = data.location.name;
-    country.textContent = data.location.country;
-    date.innerText = `${dayName} ${datetime.getDate()} ${monthName} ${datetime.getFullYear()}`;
-    hour.textContent = hourSimple;
-    imageTemp.src = data.current.condition.icon;
-    temperature.textContent =
-      temp === 'cls' ? data.current.temp_c : data.current.temp_f;
-    dataTemp.textContent = data.current.condition.text;
-    feelLike.textContent =
-      temp === 'cls'
-        ? Math.round(data.current.feelslike_c)
-        : Math.round(data.current.feelslike_f);
-    wind.textContent = Math.round(data.current.wind_mph * 0.44704) + 'm/s';
-    humidity.textContent = data.current.humidity + '%';
-    uvIndex.textContent = data.current.uv;
-    visibility.textContent = data.current.vis_km + 'km';
-    pressure.textContent = data.current.pressure_mb;
-    gust.textContent = data.current.gust_kph + 'km';
-    isDay.textContent = data.current.is_day === 1 ? 'yes' : 'no';
+  getJsonLocation(name)
+    .then((data) => {
+      errorContainer.classList.remove('active');
 
-    chanceRain.textContent = 'N/A';
-    console.log(data);
-  });
-  // console.log(jsonData);
+      const datetime = new Date(data.location.localtime);
+      const dayName = getDayName(datetime.getDay());
+      const monthName = getMonthName(datetime.getMonth());
+      const hourSimple = `${datetime.getHours()}:${datetime.getMinutes()}`;
+      const imageTemp = document.getElementById('img-temp');
+      const wind = document.getElementById('wind');
+
+      //loaader de carga con retraso, para que se vea que carga
+      setTimeout(() => {
+        loader.classList.remove('active');
+        containerMain.classList.add('active');
+      }, 500);
+
+      nameLocation.textContent = data.location.name;
+      country.textContent = data.location.country;
+      date.innerText = `${dayName} ${datetime.getDate()} ${monthName} ${datetime.getFullYear()}`;
+      hour.textContent = hourSimple;
+      imageTemp.src = data.current.condition.icon;
+      temperature.textContent =
+        temp === 'cls'
+          ? `${Math.round(data.current.temp_c)}°C`
+          : `${Math.round(data.current.temp_f)}°F`;
+      dataTemp.textContent = data.current.condition.text;
+      feelLike.textContent =
+        temp === 'cls'
+          ? Math.round(data.current.feelslike_c)
+          : Math.round(data.current.feelslike_f);
+      wind.textContent = Math.round(data.current.wind_mph * 0.44704) + 'm/s';
+      humidity.textContent = data.current.humidity + '%';
+      uvIndex.textContent = data.current.uv;
+      visibility.textContent = data.current.vis_km + 'km';
+      pressure.textContent = data.current.pressure_mb;
+      gust.textContent = data.current.gust_kph + 'km';
+      isDay.textContent = data.current.is_day === 1 ? 'yes' : 'no';
+
+      chanceRain.textContent = 'N/A';
+      console.log(data);
+    })
+    .catch((error) => {
+      loader.classList.remove('active');
+      errorContainer.classList.add('active');
+      // errorContainer.textContent = 'City not found';
+      errorContainer.children[0].textContent = 'City not found';
+      // console.log(errorContainer.children[0]);
+    });
 };
 
 const getDayName = (day) => {
@@ -127,4 +166,4 @@ const getMonthName = (month) => {
 //   nameLocation.innerText = nameLoc;
 // country = innerText = ;
 
-dataChange('lima', tempScale);
+// dataChange('lima', tempScale);
