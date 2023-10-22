@@ -106,6 +106,51 @@ class LinkedList {
     }
     return string + '( null )'; // => ( value ) -> ( value ) -> ( value ) -> null
   }
+  // inserta un nuevo nodo con el proporcionado por value y index
+  insertAt(value, index) {
+    // si es el head
+    if (index === 0) {
+      let prevHeader = this.header;
+      this.prepend(value);
+      // solo asignamos el .next al anterior header
+      this.header.next = prevHeader;
+      return this.toString();
+    }
+    // si es al final, lo podemos agrgar con el metodo append, que pone al final
+    if (index > this.size() - 1) {
+      this.append(value);
+      return this.toString();
+    }
+    // para cualquier index de la lista
+    let prevNode = this.atIndex(index - 1); // nodo previo [actual - 1]
+    const newNode = new Node(value);
+    // ponemos el nodo del indice actual en el vinculo de nuestro nodo
+    newNode.next = this.atIndex(index);
+    // linkeamos nuestro nodo con el nodo previo
+    prevNode.next = newNode;
+    return this.toString();
+  }
+  // remover un nodo por su indice
+  removeAt(index) {
+    if (index === 0) {
+      // si el header es el unico elemento
+      if (this.size === 1) this.header = null;
+      // si hay mas elementos
+      else this.header = this.atIndex(1);
+      return this.toString();
+    }
+
+    if (index >= this.size() - 1) {
+      // si es el ultimo ejecutamos la funcion pop => elimina el ultimo elemnto de la lista
+      this.pop();
+      return this.toString();
+    }
+
+    const prevNode = this.atIndex(index - 1);
+    // cambiamos los vinculos next de el anterior con el que tenemos en nuestro nodo
+    prevNode.next = this.atIndex(index).next;
+    return this.toString();
+  }
 }
 // el item de la lista con un valor y el vinculo al siguiente nodo 'next'
 class Node {
@@ -119,6 +164,9 @@ const myList = new LinkedList();
 myList.append(1);
 myList.append(2);
 myList.append(3);
+myList.append(4);
+myList.append(5);
+myList.append(6);
 
 console.log(myList.head());
 console.log(myList.tail());
@@ -129,3 +177,7 @@ console.log(myList.contains(0));
 console.log(myList.find(3));
 
 console.log(myList.toString());
+
+console.log(myList.insertAt(45, 4));
+
+console.log(myList.removeAt(1));
