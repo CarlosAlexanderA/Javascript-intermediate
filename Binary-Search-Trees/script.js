@@ -30,6 +30,7 @@ class Tree {
       traverse(currenNode.right);
     }
     traverse(obj);
+    console.log(values);
     values.shift(); // eliminamos el primer elemento
     return values;
   }
@@ -84,67 +85,93 @@ class Tree {
       }
     }
   }
+  // Eliminar un nodo segun su valor del arbol
   delete(value) {
     let myTree = this.root;
+    // recorrer el arbol hasta que no haya ninguno
     while (myTree !== null) {
       if (value > myTree.value) {
+        // cuando el valor de un hijo de un nodo sea igual a value
         if (myTree.right.value === value) {
-          let prevNode = myTree;
-          let current = myTree.right;
-          console.log(prevNode);
+          let prevNode = myTree; // nodo previo al del valor
+          let current = myTree.right; // nodo con el valor(value)
+          // cuando el nodo no tenga descendencia
           if (current.left === null && current.right === null) {
             prevNode.right = null;
             break;
           }
-          const newTree = this.build(this.#extratValues(current));
-          console.log(this.#extratValues(current));
+          // cuando el nodo tenga descendenciạ̣̣
+          // '#extratValues' => obtiene un array con los valores del nodo actual
+          // tenemos que obtener un nuevo nodo central
+          const newTree = this.build(this.#extratValues(current)); // creamos un nuevo nodo con los valores el array de datos
 
-          // console.log(prevNode);
-          prevNode.right = newTree;
+          // devolvemos el nuevo nodo , con un nuevo root
+          prevNode.right = newTree; // se crea una nueva raiz
           break;
         }
-
+        // pasamos al siguiente nodo
         myTree = myTree.right;
       } else {
+        // lo mismo que nuestro if de arriba, solo cambiamos el 'right' por el 'left'
+        // ya que queremos agregarlo en la izquierda
         if (myTree.left.value === value) {
-          //#region comentt
-          // let prevNode = myTree;
-          // let current = myTree.left;
-          // // console.log(prevNode);
-          // // prevNode.right = current.right;
-          // prevNode.left = current.left;
-
-          // break;
-          //#endregion
           let prevNode = myTree;
           let current = myTree.left;
-          console.log(prevNode);
-          console.log(current);
-
           if (current.left === null && current.right === null) {
             prevNode.left = null;
             break;
           }
           const newTree = this.build(this.#extratValues(current));
-          console.log(this.#extratValues(current));
-
-          // console.log(prevNode);
           prevNode.left = newTree;
           break;
         }
-
+        // pasamos al siguiente nodo
         myTree = myTree.left;
       }
     }
   }
+  // encuentra el nodo por el valor y lo devuelve
+  find(value) {
+    let myTree = this.root;
+    while (myTree !== null) {
+      if (value === myTree.value) {
+        return myTree;
+      }
+      // segun el valor del nodo va a la izquierda o derecha
+      if (value > myTree.value) {
+        myTree = myTree.right;
+      } else {
+        myTree = myTree.left;
+      }
+    }
+    // en caso de no encontrarlo
+    console.log('node not found');
+    return null;
+  }
+  // devolver el arbol en niveles como un array
+  levelOrder(callback) {
+    if (!this.root) return [];
+    const queue = [this.root]; // almacena los nodos y los guarda dentro del mismo
+    const results = []; // el array que se agregaran los niveles
+    while (queue.length !== 0) {
+      let size = queue.length; // cuenta los elementos de nuestro array
+      let level = []; // se muestra en un array nuestros niveles
+      for (let i = 0; i < size; i++) {
+        // segun el size se ejecutaran n vecces
+        const node = queue.shift(); // el primer dato de 'queue'
+        level.push(node.value); // ingresamos los datos a la matriz del nivel
+        if (node.left !== null) queue.push(node.left); // agrega un nuevo elemento al array de 'queue'
+        if (node.right !== null) queue.push(node.right); // agrega un nuevo elemento al array de 'queue'
+        if (callback) callback(node); // en caso de tener una funcion
+      }
+
+      results.push(level); // agrega en nivel nuestro datos
+      // ejem => [ [ 8 ], [ 4, 45 ] , [ 2, 7, 21, 99 ]...etc ]
+    }
+    // siemre y cuando no haya una funcion devueleve el resultado por niveles
+    if (!callback) return results;
+  }
 }
-
-// const numberDesorder = [1, 4, 2, 45, 8, 21, 89, 9, 3, 5, 7, 4];
-// const mid = Math.floor(numberDesorder.length / 2);
-// console.log(numberDesorder.slice(0, mid));
-// console.log(numberDesorder.slice(mid, numberDesorder.length));
-
-// console.log(numberDesorder.sort((a, b) => a - b));
 
 const myTree = new Tree([1, 4, 2, 45, 8, 21, 89, 9, 3, 5, 7, 4, 99, 80]);
 // const myTree = new Tree([1, 4, 2, 45, 8]);
@@ -174,7 +201,23 @@ prettyPrint(myTree.root);
 // myTree.insert(6);
 
 // prettyPrint(myTree.insert(6));
-myTree.delete(45);
+myTree.delete(80);
 console.log('-------------------');
 
 prettyPrint(myTree.root);
+prettyPrint(myTree.find(55));
+
+console.log(myTree.levelOrder());
+
+// │       ┌── 99
+// │       │   └── 89
+// │   ┌── 45
+// │   │   └── 21
+// │   │       └── 9
+// └── 8
+//     │   ┌── 7
+//     │   │   └── 5
+//     └── 4
+//         │   ┌── 3
+//         └── 2
+//             └── 1
