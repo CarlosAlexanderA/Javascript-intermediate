@@ -56,7 +56,7 @@ class Tree {
     while (myTree !== null) {
       // devolvemos un error si ya existe el valor
       if (value === myTree.value) {
-        console.error('you cannot overwrite an existing node ');
+        // console.error('you cannot overwrite an existing node ');
         return null;
       }
       // recorremos nuestros Nodos
@@ -66,7 +66,7 @@ class Tree {
           // si esta vacio agregamos el nuevo nodo
           const newNode = new Node(value);
           myTree.right = newNode;
-          console.warn('correctly added to the tree');
+          // console.warn('correctly added to the tree');
           return myTree;
         }
         // vamos al siguiente nodo
@@ -77,7 +77,7 @@ class Tree {
           // si esta vacio agregamos el nuevo nodo
           const newNode = new Node(value);
           myTree.left = newNode;
-          console.warn('correctly added to the tree');
+          // console.warn('correctly added to the tree');
           return myTree;
         }
         // vamos al siguiente nodo
@@ -171,14 +171,101 @@ class Tree {
     // siemre y cuando no haya una funcion devueleve el resultado por niveles
     if (!callback) return results;
   }
+  // In order => left root right
+  inOrder(node = this.root, result = []) {
+    // devuvelve todo ordenado segun su valor
+    if (!this.root) return null;
+    if (node === null) return; // para detener la recursion
+    // se repite la funcion y se obtiene los datos de los dos lados
+    // primero al izquierda luego el centro (root) y la derecha
+    this.inOrder(node.left, result); // primero obtener el resultado de la izquierda
+    result.push(node.value); // apregar los datos segun el result
+    this.inOrder(node.right, result); // luego los datos de la derecha
+    // devolver el array en orden
+    if (result) return result;
+  }
+  // preorder => root left right
+  preOrder() {
+    if (!this.root) return [];
+    const queue = [this.root]; // al array con los nodos que se iran eliminando
+    const results = []; // se guarda el resultado final
+    while (queue.length !== 0) {
+      // hasta que no tengamos algun nodo se ejecuta
+      const node = queue.pop(); // extrae el ultim nodo
+      // validamos de derecha a izquierda, ya que elimanremos con pop el ultimo,
+      // es decir 'left' y luego ireos a 'right'
+      if (node.right !== null) queue.push(node.right); // agrega un nuevo elemento al array de 'queue'
+      if (node.left !== null) queue.push(node.left); // agrega un nuevo elemento al array de 'queue'
+      results.push(node.value); // agrega el valor al resultado
+      // se obtiene del ultimo nodo
+    }
+    return results; // devuelve nuestro array
+  }
+  // postorder => left right root
+  postOrder() {
+    if (!this.root) return [];
+    const stack = [this.root];
+    const result = [];
+    while (stack.length !== 0) {
+      const node = stack.pop();
+      if (node.left !== null) stack.push(node.left);
+      if (node.right !== null) stack.push(node.right);
+      result.push(node.value);
+    }
+    return result.reverse(); // se ordena de forma que solo tenemos que darlereversa
+  }
+  // devuvelve su altura, el camino mas largo para llegar a las hojas
+  height(node = this.root) {
+    if (!node) return -1;
+    // decidimos cual es el camino mas largo
+    const leftHeight = this.height(node.left);
+    const rightHeight = this.height(node.right);
+    // escogemos tnre uno de estos y le simamos segune el camino
+    return Math.max(leftHeight, rightHeight) + 1;
+  }
+  // la profundidad del nodo desde la raiz (root)
+  depth(node) {
+    let mainNodo = this.root;
+    //
+    let walk = 0;
+    while (mainNodo !== null) {
+      if (node.value === mainNodo.value) {
+        return walk;
+      }
+      // buscamos el valor del nodo
+      if (node.value > mainNodo.value) {
+        mainNodo = mainNodo.right;
+      } else if (node.value < mainNodo.value) {
+        mainNodo = mainNodo.left;
+      }
+      // aumentamos en 1 el contador por cada camino
+      walk++;
+    }
+  }
+  // verifica que el arbol este equilibrado
+  // la altura no es superior a uno(1)
+  isBalance(node = this.root) {
+    if (node === null) return true;
+    // valor absoluto de la resta de los 2 nodos
+    const heightDiff = Math.abs(
+      this.height(node.left) - this.height(node.right)
+    );
+    // devolvemos true si esta balnacado o false
+    return (
+      heightDiff <= 1 && this.isBalance(node.left) && this.isBalance(node.right)
+    );
+  }
+  // equilibra en arbol, en case que este desequilibrado
+  rebalance() {
+    if (this.root === null) return;
+    // ordenamos de nuevo los datos, para evitar errores
+    const sorted = [...new Set(this.inOrder().sort((a, b) => a - b))];
+    // creamos un nuebo arbol con build
+    this.root = this.build(sorted);
+  }
 }
 
 const myTree = new Tree([1, 4, 2, 45, 8, 21, 89, 9, 3, 5, 7, 4, 99, 80]);
-// const myTree = new Tree([1, 4, 2, 45, 8]);
-
-// const myTree = new Tree([
-//   1, 4, 2, 45, 8, 21, 89, 9, 3, 5, 7, 4, 10, 12, 20, 24, 12, 13,
-// ]);
 
 // imprime en formato estrucutrado nuestro arbol, en la consola
 // usamos recursvidad
@@ -196,18 +283,18 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
   }
 };
 // console.log(myTree.build([1, 4, 2, 45, 8, 21, 89, 9, 3, 5, 7, 4]));
-prettyPrint(myTree.root);
-// console.log(myTree.root);
-// myTree.insert(6);
+// prettyPrint(myTree.root);
+// // console.log(myTree.root);
+// // myTree.insert(6);
 
-// prettyPrint(myTree.insert(6));
-myTree.delete(80);
-console.log('-------------------');
+// // prettyPrint(myTree.insert(6));
+// myTree.delete(80);
+// console.log('-------------------');
 
-prettyPrint(myTree.root);
-prettyPrint(myTree.find(55));
+// prettyPrint(myTree.root);
+// prettyPrint(myTree.find(55));
 
-console.log(myTree.levelOrder());
+// console.log(myTree.levelOrder());
 
 // │       ┌── 99
 // │       │   └── 89
@@ -221,3 +308,43 @@ console.log(myTree.levelOrder());
 //         │   ┌── 3
 //         └── 2
 //             └── 1
+// console.log(myTree.isBalance(myTree.find(4)));
+
+// Todo Junto
+// crear un arbol de busqueda binario a partir de una matriz de numero aleatiors < 100
+
+const randomArray = (size) => {
+  // array de numeros aleatorios segun el tamaño que le pases
+  return Array.from(
+    { length: size },
+    () => Math.floor(Math.random() * 500) + 1
+  );
+};
+
+const newArrTree = randomArray(100);
+const myNewTree = new Tree(newArrTree); // nuevo arbol
+console.log('My tree from 100 data');
+prettyPrint(myNewTree.root);
+console.log(myNewTree.isBalance() ? 'it is balanced' : 'It is not balanced');
+console.log('Pre Order form the tree');
+console.log(myNewTree.preOrder());
+console.log('Post Order form the tree');
+console.log(myNewTree.postOrder());
+console.log('In Order form the tree');
+console.log(myNewTree.inOrder());
+
+for (let i = 0; i < 5; i++) {
+  myNewTree.insert(Math.floor(Math.random() * 20));
+}
+
+prettyPrint(myNewTree.root);
+console.log(myNewTree.isBalance() ? 'it is balanced' : 'It is not balanced');
+myNewTree.rebalance();
+prettyPrint(myNewTree.root);
+
+console.log('Pre Order form the tree');
+console.log(myNewTree.preOrder());
+console.log('Post Order form the tree');
+console.log(myNewTree.postOrder());
+console.log('In Order form the tree');
+console.log(myNewTree.inOrder());
