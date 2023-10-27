@@ -326,6 +326,8 @@ const myNewTree = new Tree(newArrTree); // nuevo arbol
 console.log('My tree from 100 data');
 prettyPrint(myNewTree.root);
 console.log(myNewTree.isBalance() ? 'it is balanced' : 'It is not balanced');
+console.log('Level Orfre from the tree');
+console.log(myNewTree.levelOrder());
 console.log('Pre Order form the tree');
 console.log(myNewTree.preOrder());
 console.log('Post Order form the tree');
@@ -341,7 +343,8 @@ prettyPrint(myNewTree.root);
 console.log(myNewTree.isBalance() ? 'it is balanced' : 'It is not balanced');
 myNewTree.rebalance();
 prettyPrint(myNewTree.root);
-
+console.log('Level Orfre from the tree');
+console.log(myNewTree.levelOrder());
 console.log('Pre Order form the tree');
 console.log(myNewTree.preOrder());
 console.log('Post Order form the tree');
