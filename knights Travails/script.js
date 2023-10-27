@@ -57,3 +57,5 @@ class gameBoard {
 const myGameBoard = new gameBoard([0, 0], [3, 3]);
 console.log(myGameBoard.moveInBoard([2, 1]));
 console.log(myGameBoard.myBoard);
+
+// lo dejo aqui, porque no entiendo mucho 17/10/2023
